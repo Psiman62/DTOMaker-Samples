@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>nullable</WarningsAsErrors>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="DTOMaker.Core" Version="0.3.2-beta" />
+	  <PackageReference Include="DTOMaker.Generator" Version="0.1.27-alpha" />
+	</ItemGroup>
+
+</Project>
