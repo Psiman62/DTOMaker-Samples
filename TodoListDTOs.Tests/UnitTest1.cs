@@ -1,4 +1,5 @@
 using FluentAssertions;
+using MessagePack;
 
 namespace TodoListDTOs.Tests
 {
@@ -6,13 +7,31 @@ namespace TodoListDTOs.Tests
     public class DTORegressionTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Roundtrip_DTO()
         {
-            var orig = new TodoListDTOs.MyTodoList();
-            orig.Id = 123;
+            var orig = new DTOs.MyTodoList
+            {
+                Id = 123
+            };
             ReadOnlyMemory<byte> buffer = orig.Block;
 
-            var copy = new MyTodoList(buffer.Span);
+            var copy = new DTOs.MyTodoList(buffer.Span);
+            copy.Id.Should().Be(orig.Id);
+            //todo copy.Equals(orig).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Roundtrip_MessagePack()
+        {
+            var orig = new TodoListDTOs.MessagePack.MyTodoList
+            {
+                Id = 123
+            };
+
+            ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<TodoListDTOs.MessagePack.MyTodoList>(orig);
+
+            var copy = MessagePackSerializer.Deserialize<TodoListDTOs.MessagePack.MyTodoList>(buffer);
+
             copy.Id.Should().Be(orig.Id);
             //todo copy.Equals(orig).Should().BeTrue();
         }

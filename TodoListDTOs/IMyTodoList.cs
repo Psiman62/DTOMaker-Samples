@@ -4,10 +4,12 @@
 
 namespace TodoListDTOs
 {
-    [Entity(128)]
+    [Entity]
+    [EntityLayout(128)]
     public interface IMyTodoList
     {
-        [Member(0, 8)]
+        [Member(1)]
+        [MemberLayout(0, 8)]
         long Id { get; }
     }
 }
