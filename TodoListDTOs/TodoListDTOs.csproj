@@ -5,13 +5,12 @@
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DTOMaker.Core" Version="0.6.2-beta" />
-	  <PackageReference Include="DTOMaker.Generator" Version="0.1.32-alpha" />
-	  <PackageReference Include="DTOMaker.MessagePack" Version="0.1.32-alpha" />
+	  <PackageReference Include="DTOMaker.Core" Version="0.7.5" />
+	  <PackageReference Include="DTOMaker.Generator" Version="0.2.1-beta" />
+	  <PackageReference Include="DTOMaker.MessagePack" Version="0.2.1-beta" />
 	  <PackageReference Include="MessagePack" Version="3.0.134-beta" />
 	</ItemGroup>
 
