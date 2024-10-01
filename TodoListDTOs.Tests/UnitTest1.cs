@@ -9,7 +9,7 @@ namespace TodoListDTOs.Tests
         [TestMethod]
         public void Roundtrip_DTO()
         {
-            var orig = new DTOs.MyTodoList
+            var orig = new MemBlocks.MyTodoList
             {
                 Id = 123L,
                 Code = 123,
@@ -18,7 +18,7 @@ namespace TodoListDTOs.Tests
             };
             ReadOnlyMemory<byte> buffer = orig.Block;
 
-            var copy = new DTOs.MyTodoList(buffer.Span);
+            var copy = new MemBlocks.MyTodoList(buffer.Span);
             copy.Id.Should().Be(orig.Id);
             copy.Code.Should().Be(orig.Code);
             copy.HasValue.Should().Be(orig.HasValue);
