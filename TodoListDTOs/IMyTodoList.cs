@@ -23,5 +23,19 @@ namespace TodoListDTOs
         [Member(4)]
         [MemberLayout(16, 8)]
         double Value { get; }
+
+        [Member(5)]
+        [MemberLayout(24, 4)]
+        uint Value2 { get; }
+
+        // todo
+        //[Member(6)]
+        //[MemberLayout(24, 4)]
+        //byte Value3 { get; }
+
+        //[Member(6)]
+        //[MemberLayout(24, 4)]
+        //float Value2 { get; }
+
     }
 }
