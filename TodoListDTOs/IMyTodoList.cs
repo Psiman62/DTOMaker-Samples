@@ -28,11 +28,15 @@ namespace TodoListDTOs
         [MemberLayout(24, 4)]
         uint Value2 { get; }
 
-        // todo
-        //[Member(6)]
-        //[MemberLayout(24, 4)]
-        //byte Value3 { get; }
+        [Member(6)]
+        [MemberLayout(28, 1)]
+        byte Value3 { get; }
 
+        [Member(7)]
+        [MemberLayout(29, 1)]
+        sbyte Value4 { get; }
+
+        // todo
         //[Member(6)]
         //[MemberLayout(24, 4)]
         //float Value2 { get; }

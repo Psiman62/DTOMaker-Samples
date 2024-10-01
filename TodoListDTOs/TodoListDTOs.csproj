@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DTOMaker.Core" Version="0.8.3" />
-	  <PackageReference Include="DTOMaker.MemBlocks" Version="0.3.6-beta" />
+	  <PackageReference Include="DTOMaker.Core" Version="0.9.1" />
+	  <PackageReference Include="DTOMaker.MemBlocks" Version="0.3.7-beta" />
 	  <PackageReference Include="DTOMaker.MessagePack" Version="0.3.2-beta" />
 	  <PackageReference Include="MessagePack" Version="3.0.134-beta" />
 	</ItemGroup>
