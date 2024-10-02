@@ -5,7 +5,7 @@
 namespace TodoListDTOs
 {
     [Entity]
-    [EntityLayout(128)]
+    [EntityLayout(LayoutMethod.Explicit, 128)]
     public interface IMyTodoList
     {
         [Member(1)]

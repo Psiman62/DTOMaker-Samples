@@ -7,7 +7,7 @@ namespace TodoListDTOs.Tests
     public class DTORegressionTests
     {
         [TestMethod]
-        public void Roundtrip_DTO()
+        public void Roundtrip_MemBlocks()
         {
             var orig = new MemBlocks.MyTodoList
             {
