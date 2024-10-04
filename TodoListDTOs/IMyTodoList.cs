@@ -42,4 +42,22 @@ namespace TodoListDTOs
         //float Value2 { get; }
 
     }
+
+    [Entity]
+    [EntityLayout(LayoutMethod.SequentialV1)]
+    public interface IMyDoneList
+    {
+        [Member(1)]
+        long Id { get; }
+
+        [Member(2)]
+        int Code { get; }
+
+        [Member(3)]
+        bool HasValue { get; }
+
+        [Member(4)]
+        double Value { get; }
+
+    }
 }
