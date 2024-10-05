@@ -6,7 +6,7 @@ using System;
 namespace TodoListDTOs
 {
     [Entity]
-    [EntityLayout(LayoutMethod.Explicit, 32)]
+    [EntityLayout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
         [Member(1)][MemberLayout(0)] bool Field01 { get; }
@@ -18,13 +18,15 @@ namespace TodoListDTOs
         [Member(7)][MemberLayout(12)] int Field07 { get; }
         [Member(8)][MemberLayout(16)] uint Field08 { get; }
         [Member(9)][MemberLayout(20)] float Field09 { get; }
+        [Member(10)][MemberLayout(24)] long Field10 { get; }
+        [Member(11)][MemberLayout(32)] ulong Field11 { get; }
+        [Member(12)][MemberLayout(40)] double Field12 { get; }
+        [Member(13)][MemberLayout(48)] Guid Field13 { get; }
+
 #if NET6_0_OR_GREATER
-        [Member(10)][MemberLayout(10)] Half Field10 { get; }
+        [Member(14)][MemberLayout(64)] Half Field14 { get; }
 #endif
         int? OptionalField07 { get; }
-#if NET6_0_OR_GREATER
-        Half? OptionalField10 { get; }
-#endif
     }
 
     [Entity]
@@ -40,13 +42,14 @@ namespace TodoListDTOs
         [Member(7)] int Field07 { get; }
         [Member(8)] uint Field08 { get; }
         [Member(9)] float Field09 { get; }
-#if NET6_0_OR_GREATER
-        [Member(10)] Half Field10 { get; }
-#endif
+        [Member(10)] long Field10 { get; }
+        [Member(11)] ulong Field11 { get; }
+        [Member(12)] double Field12 { get; }
+        [Member(13)] Guid Field13 { get; }
 
-        int? OptionalField07 { get; }
 #if NET6_0_OR_GREATER
-        Half? OptionalField10 { get; }
+        [Member(14)] Half Field14 { get; }
 #endif
+        int? OptionalField07 { get; }
     }
 }
