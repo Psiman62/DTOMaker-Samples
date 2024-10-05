@@ -1,4 +1,5 @@
 ﻿using DTOMaker.Models;
+using System;
 
 [assembly: Domain]
 
@@ -9,18 +10,21 @@ namespace TodoListDTOs
     public interface IAllTypesExplicit
     {
         [Member(1)][MemberLayout(0,1)] bool Field01 { get; }
-
         [Member(2)][MemberLayout(1, 1)] sbyte Field02 { get; }
         [Member(3)][MemberLayout(2, 1)] byte Field03 { get; }
         [Member(4)][MemberLayout(4, 2)] short Field04 { get; }
         [Member(5)][MemberLayout(6, 2)] ushort Field05 { get; }
         [Member(6)][MemberLayout(8, 2)] char Field06 { get; }
-        //[Member(7)][MemberLayout(10, 2)]  Half Field07 { get; }
-        [Member(7)][MemberLayout(12, 4)] int Field08 { get; }
-        [Member(8)][MemberLayout(16, 4)] uint Field09 { get; }
-        [Member(9)][MemberLayout(20, 4)] float Field10 { get; }
-
-        int? OptionalField08 { get; }
+        [Member(7)][MemberLayout(12, 4)] int Field07 { get; }
+        [Member(8)][MemberLayout(16, 4)] uint Field08 { get; }
+        [Member(9)][MemberLayout(20, 4)] float Field09 { get; }
+#if NET6_0_OR_GREATER
+        [Member(10)][MemberLayout(10, 2)] Half Field10 { get; }
+#endif
+        int? OptionalField07 { get; }
+#if NET6_0_OR_GREATER
+        Half? OptionalField10 { get; }
+#endif
     }
 
     [Entity]
@@ -32,12 +36,17 @@ namespace TodoListDTOs
         [Member(3)] byte Field03 { get; }
         [Member(4)] short Field04 { get; }
         [Member(5)] ushort Field05 { get; }
-        //[Member(6)] char Field06 { get; }
-        //[Member(7)] Half Field07 { get; }
-        [Member(6)] int Field08 { get; }
-        [Member(7)] uint Field09 { get; }
-        [Member(8)] float Field10 { get; }
+        [Member(6)] char Field06 { get; }
+        [Member(7)] int Field07 { get; }
+        [Member(8)] uint Field08 { get; }
+        [Member(9)] float Field09 { get; }
+#if NET6_0_OR_GREATER
+        [Member(10)] Half Field10 { get; }
+#endif
 
-        int? OptionalField08 { get; }
+        int? OptionalField07 { get; }
+#if NET6_0_OR_GREATER
+        Half? OptionalField10 { get; }
+#endif
     }
 }
