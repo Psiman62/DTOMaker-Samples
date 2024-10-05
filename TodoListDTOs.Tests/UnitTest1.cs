@@ -7,43 +7,36 @@ namespace TodoListDTOs.Tests
     public class DTORegressionTests
     {
         [TestMethod]
-        public void Roundtrip_MemBlocks()
+        public void Roundtrip_MemBlocks_Explicit()
         {
-            var orig = new MemBlocks.MyTodoList
+            var orig = new MemBlocks.AllTypesExplicit
             {
-                Id = 123L,
-                Code = 123,
-                HasValue = true,
-                Value = 123.456D
+                Field01 = true,
+                Field08 = 123
             };
+
             ReadOnlyMemory<byte> buffer = orig.Block;
 
-            var copy = new MemBlocks.MyTodoList(buffer.Span);
-            copy.Id.Should().Be(orig.Id);
-            copy.Code.Should().Be(orig.Code);
-            copy.HasValue.Should().Be(orig.HasValue);
-            copy.Value.Should().Be(orig.Value);
+            var copy = new MemBlocks.AllTypesExplicit(buffer.Span);
+            copy.Field01.Should().Be(orig.Field01);
+            copy.Field08.Should().Be(orig.Field08);
             //todo copy.Equals(orig).Should().BeTrue();
         }
 
         [TestMethod]
         public void Roundtrip_MessagePack()
         {
-            var orig = new TodoListDTOs.MessagePack.MyTodoList
+            var orig = new MessagePack.AllTypesExplicit
             {
-                Id = 123L,
-                Code = 123,
-                HasValue = true,
-                Value = 123.456D
+                Field01 = true,
+                Field08 = 123
             };
 
-            ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<TodoListDTOs.MessagePack.MyTodoList>(orig);
+            ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<TodoListDTOs.MessagePack.AllTypesExplicit>(orig);
 
-            var copy = MessagePackSerializer.Deserialize<TodoListDTOs.MessagePack.MyTodoList>(buffer);
-            copy.Id.Should().Be(orig.Id);
-            copy.Code.Should().Be(orig.Code);
-            copy.HasValue.Should().Be(orig.HasValue);
-            copy.Value.Should().Be(orig.Value);
+            var copy = MessagePackSerializer.Deserialize<TodoListDTOs.MessagePack.AllTypesExplicit>(buffer);
+            copy.Field01.Should().Be(orig.Field01);
+            copy.Field08.Should().Be(orig.Field08);
             //todo copy.Equals(orig).Should().BeTrue();
         }
     }

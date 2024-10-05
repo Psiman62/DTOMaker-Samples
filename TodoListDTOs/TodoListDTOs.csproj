@@ -9,9 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="DTOMaker.Core" Version="0.12.2" />
-	  <PackageReference Include="DTOMaker.MemBlocks" Version="0.12.3" />
-	  <PackageReference Include="DTOMaker.MessagePack" Version="0.11.2" />
+	  <PackageReference Include="DTOMaker.Core" Version="0.13.1" />
+	  <PackageReference Include="DTOMaker.MemBlocks" Version="0.13.1" />
+	  <PackageReference Include="DTOMaker.MessagePack" Version="0.13.1" />
 	  <PackageReference Include="MessagePack" Version="3.0.134-beta" />
 	</ItemGroup>
 
