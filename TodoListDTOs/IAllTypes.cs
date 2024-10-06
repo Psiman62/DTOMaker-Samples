@@ -22,6 +22,7 @@ namespace TodoListDTOs
         [Member(11)][MemberLayout(32)] ulong Field11 { get; }
         [Member(12)][MemberLayout(40)] double Field12 { get; }
         [Member(13)][MemberLayout(48)] Guid Field13 { get; }
+        [Member(14)][MemberLayout(64)] Decimal Field14 { get; }
 
         int? OptionalField07 { get; }
     }
@@ -43,9 +44,10 @@ namespace TodoListDTOs
         [Member(11)] ulong Field11 { get; }
         [Member(12)] double Field12 { get; }
         [Member(13)] Guid Field13 { get; }
+        [Member(14)] Decimal Field14 { get; }
 #if NET8_0_OR_GREATER
-        [Member(14)] Int128 Field14 { get; }
-        [Member(15)] UInt128 Field15 { get; }
+        [Member(15)] Int128 Field15 { get; }
+        [Member(16)] UInt128 Field16 { get; }
 #endif
 
         int? OptionalField07 { get; }
