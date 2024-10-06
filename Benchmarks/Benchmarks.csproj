@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>net481;net6.0;net7.0;net8.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 		<PackageReference Include="DTOMaker.Core" Version="0.18.1" />
 		<PackageReference Include="DTOMaker.MemBlocks" Version="0.18.2" />
 		<PackageReference Include="DTOMaker.MessagePack" Version="0.18.1" />
