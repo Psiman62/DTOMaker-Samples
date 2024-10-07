@@ -5,7 +5,7 @@ namespace TodoListDTOs.MessagePack
 {
     public partial class AllTypesSequential : IAllTypesSequential
     {
-        [IgnoreMember]
-        int? IAllTypesSequential.OptionalField07 => this.Field01 ? this.Field07 : null;
+        //[IgnoreMember]
+        //int? IAllTypesSequential.OptionalField07 => this.Field01 ? this.Field07 : null;
     }
 }

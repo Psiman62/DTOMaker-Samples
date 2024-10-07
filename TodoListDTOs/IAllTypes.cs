@@ -24,7 +24,7 @@ namespace TodoListDTOs
         [Member(13)][MemberLayout(48)] Guid Field13 { get; }
         [Member(14)][MemberLayout(64)] Decimal Field14 { get; }
 
-        int? OptionalField07 { get; }
+        //int? OptionalField07 { get; }
     }
 
     [Entity]
@@ -50,6 +50,6 @@ namespace TodoListDTOs
         [Member(16)] UInt128 Field16 { get; }
 #endif
 
-        int? OptionalField07 { get; }
+        //int? OptionalField07 { get; }
     }
 }
