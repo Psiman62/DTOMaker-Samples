@@ -7,7 +7,7 @@ using System;
 
 namespace Benchmarks
 {
-    [Entity(implementModelInterface: true)]
+    [Entity]
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
