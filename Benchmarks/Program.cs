@@ -2,8 +2,11 @@
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using DTOMaker.Models;
+using DTOMaker.Runtime;
 using MessagePack;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Benchmarks
 {
@@ -82,8 +85,10 @@ namespace Benchmarks
         public int Roundtrip_MessagePack()
         {
             var dto = MakeMyDTO_MessagePack(Kind);
+            dto.Freeze();
             ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<MessagePack.MyDTO>(dto);
             var copy = MessagePackSerializer.Deserialize<MessagePack.MyDTO>(buffer, out int bytesRead);
+            dto.Freeze();
             return buffer.Length;
         }
 
@@ -91,10 +96,9 @@ namespace Benchmarks
         public int Roundtrip_MemBlocks()
         {
             var dto = MakeMyDTO_MemBlocks(Kind);
-            //todo dto.Freeze();
+            dto.Freeze();
             var buffer = dto.Block;
-            //todo zero-alloc load
-            var copy = new MemBlocks.MyDTO(buffer.Span);
+            var copy = new MemBlocks.MyDTO(buffer);
             return buffer.Length;
         }
     }
