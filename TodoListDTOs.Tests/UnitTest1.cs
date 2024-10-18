@@ -4,20 +4,12 @@ using MessagePack;
 
 namespace TodoListDTOs.Tests
 {
-    internal sealed class NullStore : IBlobStore
-    {
-        public ValueTask<Octets> LoadAsync(BlobId id, CancellationToken token) => new ValueTask<Octets>(Octets.Empty);
-        public ValueTask<BlobId> SaveAsync(Octets content, CancellationToken token) => new ValueTask<BlobId>(new BlobId());
-        public ValueTask<(bool, Octets?)> TryLoadAsync(BlobId id, CancellationToken token) => new ValueTask<(bool, Octets?)>((false, Octets.Empty));
-    }
-
     [TestClass]
     public class DTORegressionTests
     {
         [TestMethod]
         public void Roundtrip_MemBlocks_Explicit()
         {
-            var store = new NullStore();
             var orig = new MemBlocks.AllTypesExplicit
             {
                 Field01 = true,
@@ -38,7 +30,6 @@ namespace TodoListDTOs.Tests
         [TestMethod]
         public void Roundtrip_MessagePack()
         {
-            var store = new NullStore();
             var orig = new MessagePack.AllTypesExplicit
             {
                 Field01 = true,
