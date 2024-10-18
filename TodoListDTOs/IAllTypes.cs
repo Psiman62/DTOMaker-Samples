@@ -23,6 +23,7 @@ namespace TodoListDTOs
         [Member(12)][MemberLayout(40)] double Field12 { get; }
         [Member(13)][MemberLayout(48)] Guid Field13 { get; }
         [Member(14)][MemberLayout(64)] Decimal Field14 { get; }
+        [Member(15)][MemberLayout(80)] DayOfWeek Field15 { get; }
 
         //int? OptionalField07 { get; }
     }
@@ -45,9 +46,10 @@ namespace TodoListDTOs
         [Member(12)] double Field12 { get; }
         [Member(13)] Guid Field13 { get; }
         [Member(14)] Decimal Field14 { get; }
+        [Member(15)] DayOfWeek Field15 { get; }
 #if NET8_0_OR_GREATER
-        [Member(15)] Int128 Field15 { get; }
-        [Member(16)] UInt128 Field16 { get; }
+        [Member(16)] Int128 Field16 { get; }
+        [Member(17)] UInt128 Field17 { get; }
 #endif
 
         //int? OptionalField07 { get; }
