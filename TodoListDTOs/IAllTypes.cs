@@ -46,7 +46,7 @@ namespace TodoListDTOs
         [Member(12)] double Field12 { get; }
         [Member(13)] Guid Field13 { get; }
         [Member(14)] Decimal Field14 { get; }
-        [Member(15)] DayOfWeek Field15 { get; }
+        [Obsolete][Member(15)] DayOfWeek Field15 { get; }
 #if NET8_0_OR_GREATER
         [Member(16)] Int128 Field16 { get; }
         [Member(17)] UInt128 Field17 { get; }
