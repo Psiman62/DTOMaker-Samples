@@ -2,11 +2,8 @@
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using DTOMaker.Models;
-using DTOMaker.Runtime;
 using MessagePack;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Benchmarks
 {
@@ -14,15 +11,15 @@ namespace Benchmarks
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
-        [Member(1)] bool Field01 { get; }
-        [Member(2)] long Field02 { get; }
-        [Member(3)] Guid Field03 { get; }
+        [Member(1)] bool? Field01 { get; }
+        [Member(2)] double? Field02 { get; }
+        [Member(3)] Guid? Field03 { get; }
     }
 
     public enum ValueKind
     {
         Bool,
-        Int64,
+        Double,
         Guid,
         // todo strings
     }
@@ -32,8 +29,11 @@ namespace Benchmarks
     [MemoryDiagnoser]
     public class DTORoundtrips
     {
-        [Params(ValueKind.Bool, ValueKind.Int64, ValueKind.Guid)]
+        [Params(ValueKind.Bool, ValueKind.Double, ValueKind.Guid)]
         public ValueKind Kind;
+
+        [Params(false, true)]
+        public bool Nullable;
 
         private static readonly Guid guidValue = new("cc8af561-5172-43e6-8090-5dc1b2d02e07");
 
@@ -43,13 +43,13 @@ namespace Benchmarks
             switch (Kind)
             {
                 case ValueKind.Bool:
-                    dto.Field01 = true;
+                    dto.Field01 = Nullable ? null : true;
                     break;
-                case ValueKind.Int64:
-                    dto.Field02 = long.MaxValue;
+                case ValueKind.Double:
+                    dto.Field02 = Nullable ? null : Double.MaxValue;
                     break;
                 case ValueKind.Guid:
-                    dto.Field03 = guidValue;
+                    dto.Field03 = Nullable ? null : guidValue;
                     break;
                 default:
                     break;
@@ -63,13 +63,10 @@ namespace Benchmarks
             switch (Kind)
             {
                 case ValueKind.Bool:
-                    dto.Field01 = true;
+                    dto.Field01 = Nullable ? null : true;
                     break;
-                case ValueKind.Int64:
-                    dto.Field02 = long.MaxValue;
-                    break;
-                case ValueKind.Guid:
-                    dto.Field03 = guidValue;
+                case ValueKind.Double:
+                    dto.Field02 = Nullable ? null : Double.MaxValue;
                     break;
                 default:
                     break;
