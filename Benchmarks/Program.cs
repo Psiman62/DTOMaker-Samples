@@ -11,29 +11,28 @@ namespace Benchmarks
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
-        [Member(1)] bool? Field01 { get; }
-        [Member(2)] double? Field02 { get; }
-        [Member(3)] Guid? Field03 { get; }
+        [Member(1)] bool Field01 { get; }
+        [Member(2)][MemberLayout(0, isBigEndian: false)] double Field02LE { get; }
+        [Member(3)][MemberLayout(0, isBigEndian: true)] double Field02BE { get; }
+        [Member(4)] Guid Field03 { get; }
     }
 
     public enum ValueKind
     {
         Bool,
-        Double,
+        DoubleLE,
+        DoubleBE,
         Guid,
         // todo strings
     }
 
-    [SimpleJob(RuntimeMoniker.Net481)]
+    //[SimpleJob(RuntimeMoniker.Net481)]
     [SimpleJob(RuntimeMoniker.Net80)]
     [MemoryDiagnoser]
     public class DTORoundtrips
     {
-        [Params(ValueKind.Bool, ValueKind.Double, ValueKind.Guid)]
+        [Params(ValueKind.Bool, ValueKind.DoubleLE, ValueKind.DoubleBE, ValueKind.Guid)]
         public ValueKind Kind;
-
-        [Params(false, true)]
-        public bool Nullable;
 
         private static readonly Guid guidValue = new("cc8af561-5172-43e6-8090-5dc1b2d02e07");
 
@@ -43,13 +42,16 @@ namespace Benchmarks
             switch (Kind)
             {
                 case ValueKind.Bool:
-                    dto.Field01 = Nullable ? null : true;
+                    dto.Field01 = true;
                     break;
-                case ValueKind.Double:
-                    dto.Field02 = Nullable ? null : Double.MaxValue;
+                case ValueKind.DoubleLE:
+                    dto.Field02LE = Double.MaxValue;
+                    break;
+                case ValueKind.DoubleBE:
+                    dto.Field02BE = Double.MaxValue;
                     break;
                 case ValueKind.Guid:
-                    dto.Field03 = Nullable ? null : guidValue;
+                    dto.Field03 = guidValue;
                     break;
                 default:
                     break;
@@ -63,10 +65,13 @@ namespace Benchmarks
             switch (Kind)
             {
                 case ValueKind.Bool:
-                    dto.Field01 = Nullable ? null : true;
+                    dto.Field01 = true;
                     break;
-                case ValueKind.Double:
-                    dto.Field02 = Nullable ? null : Double.MaxValue;
+                case ValueKind.DoubleLE:
+                    dto.Field02LE = Double.MaxValue;
+                    break;
+                case ValueKind.DoubleBE:
+                    dto.Field02BE = Double.MaxValue;
                     break;
                 default:
                     break;
