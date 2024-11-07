@@ -12,8 +12,8 @@ namespace Benchmarks
     public interface IMyDTO
     {
         [Member(1)] bool Field01 { get; }
-        [Member(2)][MemberLayout(0, isBigEndian: false)] double Field02LE { get; }
-        [Member(3)][MemberLayout(0, isBigEndian: true)] double Field02BE { get; }
+        [Member(2)][MemberEndian(false)] double Field02LE { get; }
+        [Member(3)][MemberEndian(true)] double Field02BE { get; }
         [Member(4)] Guid Field03 { get; }
     }
 
