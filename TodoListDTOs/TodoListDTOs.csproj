@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DTOMaker.Core" Version="0.26.10-dev" />
+		<PackageReference Include="DTOMaker.Core" Version="0.26.11" />
 		<PackageReference Include="DTOMaker.MemBlocks" Version="0.26.2-dev" />
 		<PackageReference Include="DTOMaker.MessagePack" Version="0.26.2-dev" />
 		<PackageReference Include="MessagePack" Version="2.5.187" />

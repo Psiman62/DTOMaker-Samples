@@ -10,7 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
-		<PackageReference Include="DTOMaker.Core" Version="0.26.10-dev" />
+		<PackageReference Include="DTOMaker.Core" Version="0.26.11" />
 		<PackageReference Include="DTOMaker.MemBlocks" Version="0.26.2-dev" />
 		<PackageReference Include="DTOMaker.MessagePack" Version="0.26.2-dev" />
 		<PackageReference Include="MemoryPack" Version="1.21.3" />
