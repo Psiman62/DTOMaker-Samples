@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>net481;net6.0;net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
@@ -13,6 +13,7 @@
 		<PackageReference Include="DTOMaker.Core" Version="0.26.10-dev" />
 		<PackageReference Include="DTOMaker.MemBlocks" Version="0.26.2-dev" />
 		<PackageReference Include="DTOMaker.MessagePack" Version="0.26.2-dev" />
+		<PackageReference Include="MemoryPack" Version="1.21.3" />
 		<PackageReference Include="MessagePack" Version="2.5.187" />
 	</ItemGroup>
 
