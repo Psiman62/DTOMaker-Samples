@@ -45,28 +45,40 @@ namespace TodoListDTOs.Tests
             var orig = new MemBlocks.AllTypesSequential
             {
                 Field01 = true,
-                Field08 = 123
+                Field08 = 123,
             };
+            IAllTypesSequential origIntf = orig;
+            origIntf.Field16_StringUTF8 = "abcdef";
+
             orig.Freeze();
 
             ReadOnlyMemory<byte> buffer = orig.Block;
-
             string.Join("-", buffer.ToArray().Select(b => b.ToString("X2"))).Should().Be(
-                "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" + "" +
+                "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "61-62-63-64-65-66-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "06-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
+                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-            var copy = new MemBlocks.AllTypesExplicit(buffer);
+            var copy = new MemBlocks.AllTypesSequential(buffer);
             copy.Freeze();
+            IAllTypesSequential copyIntf = copy;
 
             copy.IsFrozen().Should().BeTrue();
             copy.Field01.Should().Be(orig.Field01);
             copy.Field08.Should().Be(orig.Field08);
-            //todo copy.Equals(orig).Should().BeTrue();
+            copy.Field16_Length.Should().Be(orig.Field16_Length);
+            copyIntf.Field16_StringUTF8.Should().Be(origIntf.Field16_StringUTF8);
         }
 
         [TestMethod]
