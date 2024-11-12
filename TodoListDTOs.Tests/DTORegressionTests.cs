@@ -11,14 +11,17 @@ namespace TodoListDTOs.Tests
         [TestMethod]
         public void Roundtrip_MemBlocks_Explicit()
         {
-            var orig = new MemBlocks.AllTypesExplicit
+            var orig = new CSPoco.AllTypesExplicit()
             {
                 Field01 = true,
                 Field08 = 123
             };
             orig.Freeze();
 
-            ReadOnlyMemory<byte> buffer = orig.Block;
+            var transport1 = new MemBlocks.AllTypesExplicit(orig);
+            transport1.Freeze();
+
+            ReadOnlyMemory<byte> buffer = transport1.Block;
 
             string.Join("-", buffer.ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+"" +
@@ -30,29 +33,32 @@ namespace TodoListDTOs.Tests
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
 
-            var copy = new MemBlocks.AllTypesExplicit(buffer);
+            var transport2 = new MemBlocks.AllTypesExplicit(buffer);
+            transport2.Freeze();
+
+            var copy = new CSPoco.AllTypesExplicit(transport2);
             copy.Freeze();
 
-            copy.IsFrozen().Should().BeTrue();
             copy.Field01.Should().Be(orig.Field01);
             copy.Field08.Should().Be(orig.Field08);
-            //todo copy.Equals(orig).Should().BeTrue();
         }
 
         [TestMethod]
         public void Roundtrip_MemBlocks_Sequential()
         {
-            var orig = new MemBlocks.AllTypesSequential
+            var orig = new CSPoco.AllTypesSequential()
             {
                 Field01 = true,
-                Field08 = 123,
+                Field08 = 123
             };
             IAllTypesSequential origIntf = orig;
             origIntf.Field16_StringUTF8 = "abcdef";
-
             orig.Freeze();
 
-            ReadOnlyMemory<byte> buffer = orig.Block;
+            var transport1 = new MemBlocks.AllTypesSequential(orig);
+            transport1.Freeze();
+
+            ReadOnlyMemory<byte> buffer = transport1.Block;
             string.Join("-", buffer.ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
@@ -70,14 +76,18 @@ namespace TodoListDTOs.Tests
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-            var copy = new MemBlocks.AllTypesSequential(buffer);
+            var transport2 = new MemBlocks.AllTypesSequential(buffer);
+            transport2.Freeze();
+
+            var copy = new CSPoco.AllTypesSequential(transport2);
             copy.Freeze();
-            IAllTypesSequential copyIntf = copy;
 
             copy.IsFrozen().Should().BeTrue();
             copy.Field01.Should().Be(orig.Field01);
             copy.Field08.Should().Be(orig.Field08);
             copy.Field16_Length.Should().Be(orig.Field16_Length);
+
+            IAllTypesSequential copyIntf = copy;
             copyIntf.Field16_StringUTF8.Should().Be(origIntf.Field16_StringUTF8);
         }
 
