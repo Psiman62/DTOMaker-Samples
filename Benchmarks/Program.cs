@@ -2,12 +2,11 @@
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using DTOMaker.Models;
-using DataFac.Runtime;
 using MemoryPack;
 using MessagePack;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Buffers.Binary;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Benchmarks
@@ -22,45 +21,51 @@ namespace Benchmarks
         [Member(4)] Guid Field03 { get; }
     }
 
+    public interface IMemBlock
+    {
+        bool TryRead(ReadOnlySpan<byte> source);
+        bool TryWrite(Span<byte> target);
+    }
+
     [StructLayout(LayoutKind.Explicit, Size = 1)]
-    public struct BlockB001
+    public struct BlockB001 : IMemBlock
     {
         [FieldOffset(0)] public bool BoolValue;
         [FieldOffset(0)] public sbyte SByteValue;
         [FieldOffset(0)] public byte ByteValue;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 1), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 1), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 1), in this);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 2)]
-    public struct BlockB002
+    public struct BlockB002 : IMemBlock
     {
         [FieldOffset(0)] public BlockB001 A;
         [FieldOffset(1)] public BlockB001 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 2), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 2), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 2), in this);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 4)]
-    public struct BlockB004
+    public struct BlockB004 : IMemBlock
     {
         [FieldOffset(0)] public BlockB002 A;
         [FieldOffset(2)] public BlockB002 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 4), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 4), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 4), in this);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct BlockB008
+    public struct BlockB008 : IMemBlock
     {
         [FieldOffset(0)] public BlockB004 A;
         [FieldOffset(4)] public BlockB004 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 8), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 8), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 8), in this);
 
         [FieldOffset(0)] public long _long;
         [FieldOffset(0)] public double _double;
@@ -101,13 +106,13 @@ namespace Benchmarks
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public struct BlockB016
+    public struct BlockB016 : IMemBlock
     {
         [FieldOffset(0)] public BlockB008 A;
         [FieldOffset(8)] public BlockB008 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 16), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 16), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 16), in this);
 
         [FieldOffset(0)] public Guid _guid;
         public Guid GuidValueLE
@@ -130,23 +135,23 @@ namespace Benchmarks
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 32)]
-    public struct BlockB032
+    public struct BlockB032 : IMemBlock
     {
         [FieldOffset(0)] public BlockB016 A;
         [FieldOffset(16)] public BlockB016 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 32), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 32), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 32), in this);
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 64)]
-    public struct BlockB064
+    public struct BlockB064 : IMemBlock
     {
         [FieldOffset(0)] public BlockB032 A;
         [FieldOffset(32)] public BlockB032 B;
 
         public bool TryRead(ReadOnlySpan<byte> source) => MemoryMarshal.TryRead(source.Slice(0, 64), out this);
-        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 64), ref this);
+        public bool TryWrite(Span<byte> target) => MemoryMarshal.TryWrite(target.Slice(0, 64), in this);
     }
 
     public sealed class NetStruxMyDTO : IMyDTO
