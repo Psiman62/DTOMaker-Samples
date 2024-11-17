@@ -1,4 +1,4 @@
-using DTOMaker.Runtime;
+using DataFac.Runtime;
 using FluentAssertions;
 using MessagePack;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace TodoListDTOs.Tests
         [TestMethod]
         public void Roundtrip_MemBlocks_Explicit()
         {
-            var orig = new CSPoco.AllTypesExplicit()
+            var orig = new TodoListDTOs.CSPoco.AllTypesExplicit()
             {
                 Field01 = true,
                 Field08 = 123

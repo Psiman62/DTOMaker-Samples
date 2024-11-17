@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
 using DTOMaker.Models;
-using DTOMaker.Runtime;
+using DataFac.Runtime;
 using MemoryPack;
 using MessagePack;
 using System;
@@ -204,7 +204,8 @@ namespace Benchmarks
     }
 
     //[SimpleJob(RuntimeMoniker.Net481)]
-    [SimpleJob(RuntimeMoniker.Net80)]
+    //[SimpleJob(RuntimeMoniker.Net80)]
+    [SimpleJob(RuntimeMoniker.Net90)]
     [MemoryDiagnoser]
     public class DTORoundtrips
     {

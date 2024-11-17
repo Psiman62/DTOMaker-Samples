@@ -1,5 +1,5 @@
 ﻿using DTOMaker.Models;
-using DTOMaker.Runtime;
+using DataFac.Runtime;
 using System;
 using System.Buffers.Binary;
 using System.Diagnostics;
@@ -28,11 +28,7 @@ namespace TodoListDTOs
         [Member(13)][MemberLayout(48)] Guid Field13 { get; }
         [Member(14)][MemberLayout(64)] Decimal Field14 { get; }
         [Member(15)][MemberLayout(80)] int Field15_Data { get; }
-#if NET6_0_OR_GREATER
-        DayOfWeek Field15 { get { return (DayOfWeek)Field15_Data; } }
-#endif
-
-        //int? OptionalField07 { get; }
+        //DayOfWeek Field15 { get; }
     }
 
     internal static class BufferHelpers
@@ -75,107 +71,99 @@ namespace TodoListDTOs
         [Member(13)] Guid Field13 { get; }
         [Member(14)] Decimal Field14 { get; }
         [Member(15)]int Field15_Data { get; }
-#if NET6_0_OR_GREATER
-        DayOfWeek Field15 { get { return (DayOfWeek)Field15_Data; } }
-#endif
+        //DayOfWeek Field15 { get; }
         [Member(16)][MemberLayout(arrayLength: 32)] ReadOnlyMemory<byte> Field16_Buffer { get; set; }
         [Member(17)][MemberLayout(arrayLength: 32)] ReadOnlyMemory<char> Field18_Buffer { get; set; }
         [Member(18)] int Field16_Length { get; set; }
         [Member(19)] int Field18_Length { get; set; }
-#if NET6_0_OR_GREATER
-        ReadOnlyMemory<byte>? Field16_Binary
-        {
-            get
-            {
-                int length = this.Field16_Length;
-                return length switch
-                {
-                    < 0 => null,
-                    0 => ReadOnlyMemory<byte>.Empty,
-                    _ => Field16_Buffer.Slice(0, length),
-                };
-            }
-        }
-        Octets? Field16_Octets
-        {
-            get
-            {
-                int length = this.Field16_Length;
-                return length switch
-                {
-                    < 0 => null,
-                    0 => Octets.Empty,
-                    _ => Octets.UnsafeWrap(Field16_Buffer.Slice(0, length)),
-                };
-            }
-        }
-        string? Field16_StringUTF8
-        {
-            get
-            {
-                int length = this.Field16_Length;
-                return length switch
-                {
-                    < 0 => null,
-                    0 => string.Empty,
-                    _ => Encoding.UTF8.GetString(Field16_Buffer.Slice(0, length).Span),
-                };
-            }
-            set
-            {
-                if (value is null)
-                {
-                    Field16_Buffer = ReadOnlyMemory<byte>.Empty;
-                    Field16_Length = -1;
-                }
-                else if (value.Length == 0)
-                {
-                    Field16_Buffer = ReadOnlyMemory<byte>.Empty;
-                    Field16_Length = 0;
-                }
-                else
-                {
-                    ReadOnlyMemory<byte> encoded = Encoding.UTF8.GetBytes(value);
-                    Field16_Buffer = encoded;
-                    Field16_Length = encoded.Length;
-                }
-            }
-        }
-#endif
-#if NET6_0_OR_GREATER
-        ReadOnlyMemory<char>? Field18_Binary
-        {
-            get
-            {
-                const bool _isBigEndian = false;
-                int length = this.Field18_Length;
-                return length switch
-                {
-                    < 0 => null,
-                    0 => ReadOnlyMemory<char>.Empty,
-                    _ => Field18_Buffer.Slice(0, length).CorrectEndianness(_isBigEndian, BufferHelpers.CharReverser),
-                };
-            }
-        }
-        string? Field18_String
-        {
-            get
-            {
-                const bool _isBigEndian = false;
-                int length = this.Field18_Length;
-                return length switch
-                {
-                    < 0 => null,
-                    0 => string.Empty,
-                    _ => new string(Field18_Buffer.Slice(0, length).CorrectEndianness(_isBigEndian, BufferHelpers.CharReverser).Span),
-                };
-            }
-        }
-#endif
-#if NET8_0_OR_GREATER
-        [Member(20)] Int128 Field20 { get; }
-        [Member(21)] UInt128 Field21 { get; }
-#endif
+        //ReadOnlyMemory<byte>? Field16_Binary { get; set; }
+        //{
+        //    get
+        //    {
+        //        int length = this.Field16_Length;
+        //        return length switch
+        //        {
+        //            < 0 => null,
+        //            0 => ReadOnlyMemory<byte>.Empty,
+        //            _ => Field16_Buffer.Slice(0, length),
+        //        };
+        //    }
+        //}
+        //Octets? Field16_Octets { get; set; }
+        //{
+        //    get
+        //    {
+        //        int length = this.Field16_Length;
+        //        return length switch
+        //        {
+        //            < 0 => null,
+        //            0 => Octets.Empty,
+        //            _ => Octets.UnsafeWrap(Field16_Buffer.Slice(0, length)),
+        //        };
+        //    }
+        //}
+        string? Field16_StringUTF8 { get; set; }
+        //{
+        //    get
+        //    {
+        //        int length = this.Field16_Length;
+        //        return length switch
+        //        {
+        //            < 0 => null,
+        //            0 => string.Empty,
+        //            _ => Encoding.UTF8.GetString(Field16_Buffer.Slice(0, length).Span),
+        //        };
+        //    }
+        //    set
+        //    {
+        //        if (value is null)
+        //        {
+        //            Field16_Buffer = ReadOnlyMemory<byte>.Empty;
+        //            Field16_Length = -1;
+        //        }
+        //        else if (value.Length == 0)
+        //        {
+        //            Field16_Buffer = ReadOnlyMemory<byte>.Empty;
+        //            Field16_Length = 0;
+        //        }
+        //        else
+        //        {
+        //            ReadOnlyMemory<byte> encoded = Encoding.UTF8.GetBytes(value);
+        //            Field16_Buffer = encoded;
+        //            Field16_Length = encoded.Length;
+        //        }
+        //    }
+        //}
+        //ReadOnlyMemory<char>? Field18_Binary { get; set; }
+        //{
+        //    get
+        //    {
+        //        const bool _isBigEndian = false;
+        //        int length = this.Field18_Length;
+        //        return length switch
+        //        {
+        //            < 0 => null,
+        //            0 => ReadOnlyMemory<char>.Empty,
+        //            _ => Field18_Buffer.Slice(0, length).CorrectEndianness(_isBigEndian, BufferHelpers.CharReverser),
+        //        };
+        //    }
+        //}
+        //string? Field18_String { get; set; }
+        //{
+        //    get
+        //    {
+        //        const bool _isBigEndian = false;
+        //        int length = this.Field18_Length;
+        //        return length switch
+        //        {
+        //            < 0 => null,
+        //            0 => string.Empty,
+        //            _ => new string(Field18_Buffer.Slice(0, length).CorrectEndianness(_isBigEndian, BufferHelpers.CharReverser).Span),
+        //        };
+        //    }
+        //}
+        //[Member(20)] Int128 Field20 { get; }
+        //[Member(21)] UInt128 Field21 { get; }
 
         //int? OptionalField07 { get; }
     }
