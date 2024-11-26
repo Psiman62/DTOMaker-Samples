@@ -1,5 +1,4 @@
 ﻿using MessagePack;
-using System;
 using System.Text;
 
 namespace Benchmarks.MessagePack
@@ -16,7 +15,11 @@ namespace Benchmarks.MessagePack
                 {
                     < 0 => null,
                     0 => string.Empty,
+#if NET7_0_OR_GREATER
                     _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length))
+#else
+                    _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length).ToArray())
+#endif
                 };
             }
             set

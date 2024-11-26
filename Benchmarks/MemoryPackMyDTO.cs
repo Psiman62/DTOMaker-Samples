@@ -1,4 +1,5 @@
-﻿using MemoryPack;
+﻿#if NET7_0_OR_GREATER
+using MemoryPack;
 using System;
 
 namespace Benchmarks
@@ -17,3 +18,4 @@ namespace Benchmarks
         [MemoryPackInclude] public string? Field05 { get; set; }
     }
 }
+#endif

@@ -1,18 +1,21 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
+#if NET7_0_OR_GREATER
 using MemoryPack;
+#endif
 using MessagePack;
 using System;
 
 namespace Benchmarks
 {
-    //[SimpleJob(RuntimeMoniker.Net481)]
-    //[SimpleJob(RuntimeMoniker.Net80)]
+    [SimpleJob(RuntimeMoniker.Net481)]
+    [SimpleJob(RuntimeMoniker.Net80)]
     [SimpleJob(RuntimeMoniker.Net90)]
     [MemoryDiagnoser]
     public class DTORoundtrips
     {
-        [Params(ValueKind.Bool, ValueKind.DoubleLE, ValueKind.Guid, ValueKind.StringNull, ValueKind.StringZero, ValueKind.StringFull)]
+        //[Params(ValueKind.Bool, ValueKind.DoubleLE, ValueKind.Guid, ValueKind.StringFull)]
+        [Params(ValueKind.StringFull)]
         public ValueKind Kind;
 
         private static readonly Guid guidValue = new("cc8af561-5172-43e6-8090-5dc1b2d02e07");
@@ -56,6 +59,7 @@ namespace Benchmarks
             return dto;
         }
 
+#if NET7_0_OR_GREATER
         private MemoryPackMyDTO MakeMyDTO_MemoryPack(ValueKind id)
         {
             var dto = new MemoryPackMyDTO();
@@ -84,6 +88,7 @@ namespace Benchmarks
             }
             return dto;
         }
+#endif
 
         private MemBlocks.MyDTO MakeMyDTO_MemBlocks(ValueKind id)
         {
@@ -158,6 +163,7 @@ namespace Benchmarks
             return buffer.Length;
         }
 
+#if NET7_0_OR_GREATER
         [Benchmark]
         public int Roundtrip_MemoryPack()
         {
@@ -168,6 +174,7 @@ namespace Benchmarks
             dto.Freeze();
             return buffer.Length;
         }
+#endif
 
         [Benchmark]
         public int Roundtrip_MemBlocks()

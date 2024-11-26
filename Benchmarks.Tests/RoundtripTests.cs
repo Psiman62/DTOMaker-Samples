@@ -35,6 +35,7 @@ namespace Benchmarks.Tests
             sut.Roundtrip_NetStrux();
         }
 
+#if NET7_0_OR_GREATER
         [Theory]
         [InlineData(ValueKind.StringNull)]
         [InlineData(ValueKind.StringZero)]
@@ -45,5 +46,6 @@ namespace Benchmarks.Tests
             sut.Kind = valueKind;
             sut.Roundtrip_MemoryPack();
         }
+#endif
     }
 }

@@ -12,7 +12,14 @@ namespace Benchmarks.MemBlocks
                 short length = this.Field05_Length;
                 if (length < 0) return null;
                 else if (length == 0) return string.Empty;
-                else return Encoding.UTF8.GetString(this.Field05_Data.Span.Slice(0, length));
+                else
+                {
+#if NET7_0_OR_GREATER
+                    return Encoding.UTF8.GetString(this.Field05_Data.Span.Slice(0, length));
+#else
+                    return Encoding.UTF8.GetString(this.Field05_Data.Span.Slice(0, length).ToArray());
+#endif
+                }
             }
             set
             {

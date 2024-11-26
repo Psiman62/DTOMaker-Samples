@@ -80,7 +80,11 @@ namespace Benchmarks
                 {
                     < 0 => null,
                     0 => string.Empty,
+#if NET7_0_OR_GREATER
                     _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length))
+#else
+                    _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length).ToArray())
+#endif
                 };
             }
             set
@@ -95,10 +99,16 @@ namespace Benchmarks
                 }
                 else
                 {
+#if NET7_0_OR_GREATER
                     Span<byte> buffer = stackalloc byte[128];
                     int length = Encoding.UTF8.GetBytes(value.AsSpan(), buffer);
                     this.Set_Field05_Data(buffer);
                     this.Field05_Length = (short)length;
+#else
+                    var bytes = Encoding.UTF8.GetBytes(value);
+                    this.Set_Field05_Data(bytes.AsSpan());
+                    this.Field05_Length = (short)bytes.Length;
+#endif
                 }
             }
         }
