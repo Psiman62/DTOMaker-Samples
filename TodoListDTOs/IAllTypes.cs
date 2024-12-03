@@ -9,7 +9,7 @@ using System.Text;
 
 namespace TodoListDTOs
 {
-    [Entity]
+    [Entity(1)]
     [EntityLayout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
@@ -52,7 +52,7 @@ namespace TodoListDTOs
         }
     }
 
-    [Entity]
+    [Entity(2)]
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IAllTypesSequential
     {

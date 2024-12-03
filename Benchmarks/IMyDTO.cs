@@ -3,7 +3,7 @@ using System;
 
 namespace Benchmarks
 {
-    [Entity]
+    [Entity(1)]
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
