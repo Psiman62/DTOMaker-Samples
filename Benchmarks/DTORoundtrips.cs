@@ -9,13 +9,13 @@ using System;
 namespace Benchmarks
 {
     [SimpleJob(RuntimeMoniker.Net481)]
-    [SimpleJob(RuntimeMoniker.Net80)]
+    //[SimpleJob(RuntimeMoniker.Net80)]
     [SimpleJob(RuntimeMoniker.Net90)]
     [MemoryDiagnoser]
     public class DTORoundtrips
     {
         //[Params(ValueKind.Bool, ValueKind.DoubleLE, ValueKind.Guid, ValueKind.StringFull)]
-        [Params(ValueKind.StringFull)]
+        [Params(ValueKind.Guid, ValueKind.StringFull)]
         public ValueKind Kind;
 
         private static readonly Guid guidValue = new("cc8af561-5172-43e6-8090-5dc1b2d02e07");
