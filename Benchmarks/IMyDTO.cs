@@ -1,9 +1,12 @@
 ﻿using DTOMaker.Models;
+using DTOMaker.Models.MemBlocks;
+using DTOMaker.Models.MessagePack;
 using System;
 
 namespace Benchmarks
 {
-    [Entity(1)]
+    [Entity]
+    [EntityTag(1)]
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {

@@ -4,12 +4,15 @@ using System;
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Text;
+using DTOMaker.Models.MessagePack;
+using DTOMaker.Models.MemBlocks;
 
 [assembly: Domain]
 
 namespace TodoListDTOs
 {
-    [Entity(1)]
+    [Entity]
+    [EntityTag(1)]
     [EntityLayout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
@@ -52,7 +55,8 @@ namespace TodoListDTOs
         }
     }
 
-    [Entity(2)]
+    [Entity]
+    [EntityTag(2)]
     [EntityLayout(LayoutMethod.SequentialV1)]
     public interface IAllTypesSequential
     {
