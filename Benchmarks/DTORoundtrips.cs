@@ -5,6 +5,7 @@ using MemoryPack;
 #endif
 using MessagePack;
 using System;
+using System.Linq;
 
 namespace Benchmarks
 {
@@ -181,9 +182,9 @@ namespace Benchmarks
         {
             var dto = MakeMyDTO_MemBlocks(Kind);
             dto.Freeze();
-            var buffer = dto.Block;
-            var copy = new MemBlocks.MyDTO(buffer);
-            return buffer.Length;
+            var buffers = dto.GetBuffers();
+            var copy = new MemBlocks.MyDTO(buffers);
+            return buffers.Sum(b => b.Length);
         }
 
         [Benchmark]

@@ -21,9 +21,10 @@ namespace TodoListDTOs.Tests
             var transport1 = new MemBlocks.AllTypesExplicit(orig);
             transport1.Freeze();
 
-            ReadOnlyMemory<byte> buffer = transport1.Block;
+            var buffers = transport1.GetBuffers();
+            buffers.Length.Should().Be(1);
 
-            string.Join("-", buffer.ToArray().Select(b => b.ToString("X2"))).Should().Be(
+            string.Join("-", buffers[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+"" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
@@ -33,7 +34,7 @@ namespace TodoListDTOs.Tests
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
 
-            var transport2 = new MemBlocks.AllTypesExplicit(buffer);
+            var transport2 = new MemBlocks.AllTypesExplicit(buffers);
             transport2.Freeze();
 
             var copy = new CSPoco.AllTypesExplicit(transport2);
@@ -58,8 +59,10 @@ namespace TodoListDTOs.Tests
             var transport1 = new MemBlocks.AllTypesSequential(orig);
             transport1.Freeze();
 
-            ReadOnlyMemory<byte> buffer = transport1.Block;
-            string.Join("-", buffer.ToArray().Select(b => b.ToString("X2"))).Should().Be(
+            var buffers = transport1.GetBuffers();
+            buffers.Length.Should().Be(1);
+
+            string.Join("-", buffers[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
@@ -76,7 +79,7 @@ namespace TodoListDTOs.Tests
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-            var transport2 = new MemBlocks.AllTypesSequential(buffer);
+            var transport2 = new MemBlocks.AllTypesSequential(buffers);
             transport2.Freeze();
 
             var copy = new CSPoco.AllTypesSequential(transport2);
