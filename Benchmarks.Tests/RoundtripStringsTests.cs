@@ -1,6 +1,6 @@
-namespace Benchmarks.Tests
+﻿namespace Benchmarks.Tests
 {
-    public class RoundtripBasicsTests
+    public class RoundtripStringsTests
     {
         [Theory]
         [InlineData(ValueKind.StringNull)]
@@ -8,7 +8,7 @@ namespace Benchmarks.Tests
         [InlineData(ValueKind.StringFull)]
         public void Roundtrip_MessagePack(ValueKind valueKind)
         {
-            var sut = new DTORoundtripBasics();
+            var sut = new DTORoundtripStrings();
             sut.Kind = valueKind;
             sut.Roundtrip_MessagePack();
         }
@@ -17,9 +17,20 @@ namespace Benchmarks.Tests
         [InlineData(ValueKind.StringNull)]
         [InlineData(ValueKind.StringZero)]
         [InlineData(ValueKind.StringFull)]
+        public void Roundtrip_MemoryPack(ValueKind valueKind)
+        {
+            var sut = new DTORoundtripStrings();
+            sut.Kind = valueKind;
+            sut.Roundtrip_MemoryPack();
+        }
+
+        [Theory]
+        [InlineData(ValueKind.StringNull)]
+        [InlineData(ValueKind.StringZero)]
+        [InlineData(ValueKind.StringFull)]
         public void Roundtrip_MemBlocks(ValueKind valueKind)
         {
-            var sut = new DTORoundtripBasics();
+            var sut = new DTORoundtripStrings();
             sut.Kind = valueKind;
             sut.Roundtrip_MemBlocks();
         }
@@ -30,20 +41,10 @@ namespace Benchmarks.Tests
         [InlineData(ValueKind.StringFull)]
         public void Roundtrip_NetStrux(ValueKind valueKind)
         {
-            var sut = new DTORoundtripBasics();
+            var sut = new DTORoundtripStrings();
             sut.Kind = valueKind;
             sut.Roundtrip_NetStrux();
         }
 
-        [Theory]
-        [InlineData(ValueKind.StringNull)]
-        [InlineData(ValueKind.StringZero)]
-        [InlineData(ValueKind.StringFull)]
-        public void Roundtrip_MemoryPack(ValueKind valueKind)
-        {
-            var sut = new DTORoundtripBasics();
-            sut.Kind = valueKind;
-            sut.Roundtrip_MemoryPack();
-        }
     }
 }

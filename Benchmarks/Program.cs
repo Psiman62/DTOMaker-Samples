@@ -7,7 +7,7 @@ namespace Benchmarks
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<DTORoundtrips>();
+            var summary = BenchmarkRunner.Run<DTORoundtripStrings>();
         }
     }
 }

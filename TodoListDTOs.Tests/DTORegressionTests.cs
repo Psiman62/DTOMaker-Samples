@@ -24,7 +24,7 @@ namespace TodoListDTOs.Tests
             var buffers = transport1.GetBuffers();
             buffers.Length.Should().Be(1);
 
-            string.Join("-", buffers[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
+            string.Join("-", buffers.Span[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+"" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
@@ -62,7 +62,7 @@ namespace TodoListDTOs.Tests
             var buffers = transport1.GetBuffers();
             buffers.Length.Should().Be(1);
 
-            string.Join("-", buffers[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
+            string.Join("-", buffers.Span[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
                 "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
                 "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +

@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>net481;net8.0;net9.0</TargetFrameworks>
+		<TargetFramework>net9.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable</WarningsAsErrors>
@@ -12,11 +12,11 @@
 		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 		<PackageReference Include="DataFac.Memory" Version="0.5.1" />
 		<PackageReference Include="DataFac.Runtime" Version="0.1.6" />
-		<PackageReference Include="DTOMaker.MemBlocks" Version="0.41.2" />
-		<PackageReference Include="DTOMaker.MessagePack" Version="0.41.2" />
-		<PackageReference Include="DTOMaker.Models" Version="0.41.6" />
-		<PackageReference Include="DTOMaker.Models.MemBlocks" Version="0.41.6" />
-		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.41.6" />
+		<PackageReference Include="DTOMaker.MemBlocks" Version="0.43.3" />
+		<PackageReference Include="DTOMaker.MessagePack" Version="0.43.3" />
+		<PackageReference Include="DTOMaker.Models" Version="0.43.3" />
+		<PackageReference Include="DTOMaker.Models.MemBlocks" Version="0.43.3" />
+		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.43.3" />
 		<PackageReference Include="MemoryPack" Version="1.21.3" />
 		<PackageReference Include="MessagePack" Version="2.5.192" />
 		<PackageReference Include="System.Memory" Version="4.6.0" />

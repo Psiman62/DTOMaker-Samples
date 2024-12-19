@@ -3,6 +3,30 @@ using System.Text;
 
 namespace Benchmarks.MessagePack
 {
+    public partial class StringsDTO
+    {
+        [IgnoreMember]
+        public string? Field05
+        {
+            get
+            {
+                return Field05_HasValue ? Field05_Value : null;
+            }
+            set
+            {
+                if (value is null)
+                {
+                    Field05_HasValue = false;
+                    Field05_Value = "";
+                }
+                else
+                {
+                    Field05_HasValue = true;
+                    Field05_Value = value;
+                }
+            }
+        }
+    }
     public partial class MyDTO
     {
         [IgnoreMember]
@@ -15,11 +39,7 @@ namespace Benchmarks.MessagePack
                 {
                     < 0 => null,
                     0 => string.Empty,
-#if NET7_0_OR_GREATER
                     _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length))
-#else
-                    _ => Encoding.UTF8.GetString(Field05_Data.Span.Slice(0, length).ToArray())
-#endif
                 };
             }
             set

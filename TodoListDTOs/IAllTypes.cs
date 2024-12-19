@@ -16,21 +16,21 @@ namespace TodoListDTOs
     [EntityLayout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
-        [Member(1)][MemberLayout(0)] bool Field01 { get; }
-        [Member(2)][MemberLayout(1)] sbyte Field02 { get; }
-        [Member(3)][MemberLayout(2)] byte Field03 { get; }
-        [Member(4)][MemberLayout(4)] short Field04 { get; }
-        [Member(5)][MemberLayout(6)] ushort Field05 { get; }
-        [Member(6)][MemberLayout(8)] char Field06 { get; }
-        [Member(7)][MemberLayout(12)] int Field07 { get; }
-        [Member(8)][MemberLayout(16)] uint Field08 { get; }
-        [Member(9)][MemberLayout(20)] float Field09 { get; }
-        [Member(10)][MemberLayout(24)] long Field10 { get; }
-        [Member(11)][MemberLayout(32)] ulong Field11 { get; }
-        [Member(12)][MemberLayout(40)] double Field12 { get; }
-        [Member(13)][MemberLayout(48)] Guid Field13 { get; }
-        [Member(14)][MemberLayout(64)] Decimal Field14 { get; }
-        [Member(15)][MemberLayout(80)] int Field15_Data { get; }
+        [Member(1)][Offset(0)] bool Field01 { get; }
+        [Member(2)][Offset(1)] sbyte Field02 { get; }
+        [Member(3)][Offset(2)] byte Field03 { get; }
+        [Member(4)][Offset(4)] short Field04 { get; }
+        [Member(5)][Offset(6)] ushort Field05 { get; }
+        [Member(6)][Offset(8)] char Field06 { get; }
+        [Member(7)][Offset(12)] int Field07 { get; }
+        [Member(8)][Offset(16)] uint Field08 { get; }
+        [Member(9)][Offset(20)] float Field09 { get; }
+        [Member(10)][Offset(24)] long Field10 { get; }
+        [Member(11)][Offset(32)] ulong Field11 { get; }
+        [Member(12)][Offset(40)] double Field12 { get; }
+        [Member(13)][Offset(48)] Guid Field13 { get; }
+        [Member(14)][Offset(64)] Decimal Field14 { get; }
+        [Member(15)][Offset(80)] int Field15_Data { get; }
         //DayOfWeek Field15 { get; }
     }
 
@@ -76,8 +76,8 @@ namespace TodoListDTOs
         [Member(14)] Decimal Field14 { get; }
         [Member(15)]int Field15_Data { get; }
         //DayOfWeek Field15 { get; }
-        [Member(16)][MemberLayout(arrayLength: 32)] ReadOnlyMemory<byte> Field16_Buffer { get; set; }
-        [Member(17)][MemberLayout(arrayLength: 32)] ReadOnlyMemory<char> Field18_Buffer { get; set; }
+        [Member(16)][Length(32)] ReadOnlyMemory<byte> Field16_Buffer { get; set; }
+        [Member(17)][Length(32)] ReadOnlyMemory<char> Field18_Buffer { get; set; }
         [Member(18)] int Field16_Length { get; set; }
         [Member(19)] int Field18_Length { get; set; }
         //ReadOnlyMemory<byte>? Field16_Binary { get; set; }
