@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Order;
 using MemoryPack;
 using MessagePack;
 using System;
@@ -8,13 +9,14 @@ namespace Benchmarks
 {
     [SimpleJob(RuntimeMoniker.Net90)]
     [MemoryDiagnoser]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class DTORoundtripStrings
     {
         public DTORoundtripStrings()
         {
         }
 
-        [Params(ValueKind.StringNull, ValueKind.StringZero, ValueKind.StringFull)]
+        [Params(ValueKind.StringNull, ValueKind.StringFull)]
         public ValueKind Kind;
 
         private static readonly string StringWith255Chars =

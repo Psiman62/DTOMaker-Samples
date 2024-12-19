@@ -1,20 +1,18 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Order;
 using MemoryPack;
 using MessagePack;
 using System;
 
 namespace Benchmarks
 {
-
-    //[SimpleJob(RuntimeMoniker.Net481)]
-    //[SimpleJob(RuntimeMoniker.Net80)]
     [SimpleJob(RuntimeMoniker.Net90)]
     [MemoryDiagnoser]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class DTORoundtripBasics
     {
-        //[Params(ValueKind.Bool, ValueKind.DoubleLE, ValueKind.Guid, ValueKind.StringFull)]
-        [Params(ValueKind.Bool, ValueKind.Guid, ValueKind.StringFull)]
+        [Params(ValueKind.Bool, ValueKind.Guid, ValueKind.DoubleLE)]
         public ValueKind Kind;
 
         private static readonly Guid guidValue = new("cc8af561-5172-43e6-8090-5dc1b2d02e07");

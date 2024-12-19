@@ -85,7 +85,7 @@ namespace TodoListDTOs.Tests
             var copy = new CSPoco.AllTypesSequential(transport2);
             copy.Freeze();
 
-            copy.IsFrozen().Should().BeTrue();
+            copy.IsFrozen.Should().BeTrue();
             copy.Field01.Should().Be(orig.Field01);
             copy.Field08.Should().Be(orig.Field08);
             copy.Field16_Length.Should().Be(orig.Field16_Length);
