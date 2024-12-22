@@ -13,7 +13,7 @@ namespace TodoListDTOs
 {
     [Entity]
     [EntityTag(1)]
-    [EntityLayout("AllTypesExplicit", LayoutMethod.Explicit, 128)]
+    [Id("AllTypesExplicit")][Layout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
         [Member(1)][Offset(0)] bool Field01 { get; }
@@ -57,7 +57,7 @@ namespace TodoListDTOs
 
     [Entity]
     [EntityTag(2)]
-    [EntityLayout("AllTypesSequential", LayoutMethod.SequentialV1)]
+    [Id("AllTypesSequential")][Layout(LayoutMethod.SequentialV1)]
     public interface IAllTypesSequential
     {
         [Member(1)] bool Field01 { get; }

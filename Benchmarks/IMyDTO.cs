@@ -7,7 +7,7 @@ namespace Benchmarks
 {
     [Entity]
     [EntityTag(1)]
-    [EntityLayout("MyDTP", LayoutMethod.SequentialV1)]
+    [Id("MyDTP")][Layout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
         [Member(1)] bool Field01 { get; set; }

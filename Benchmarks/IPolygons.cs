@@ -6,17 +6,17 @@ namespace Benchmarks
 {
     [Entity]
     [EntityTag(3)]
-    [EntityLayout("Polygon", LayoutMethod.SequentialV1)]
+    [Id("Polygon")][Layout(LayoutMethod.SequentialV1)]
     public interface IPolygon { }
 
     [Entity]
     [EntityTag(4)]
-    [EntityLayout("Triangle", LayoutMethod.SequentialV1)]
+    [Id("Triangle")][Layout(LayoutMethod.SequentialV1)]
     public interface ITriangle : IPolygon { }
 
     [Entity]
     [EntityTag(5)]
-    [EntityLayout("Equilateral", LayoutMethod.SequentialV1)]
+    [Id("Equilateral")][Layout(LayoutMethod.SequentialV1)]
     public interface IEquilateral : ITriangle
     {
         [Member(1)] double Length { get; set; }
@@ -24,7 +24,7 @@ namespace Benchmarks
 
     [Entity]
     [EntityTag(6)]
-    [EntityLayout("RightTriangle", LayoutMethod.SequentialV1)]
+    [Id("RightTriangle")][Layout(LayoutMethod.SequentialV1)]
     public interface IRightTriangle : ITriangle
     {
         [Member(1)] double Length { get; set; }
@@ -33,12 +33,12 @@ namespace Benchmarks
 
     [Entity]
     [EntityTag(7)]
-    [EntityLayout("Quadrilateral", LayoutMethod.SequentialV1)]
+    [Id("Quadrilateral")][Layout(LayoutMethod.SequentialV1)]
     public interface IQuadrilateral : IPolygon { }
 
     [Entity]
     [EntityTag(8)]
-    [EntityLayout("Square", LayoutMethod.SequentialV1)]
+    [Id("Square")][Layout(LayoutMethod.SequentialV1)]
     public interface ISquare : IQuadrilateral
     {
         [Member(1)] double Length { get; set; }
@@ -46,7 +46,7 @@ namespace Benchmarks
 
     [Entity]
     [EntityTag(9)]
-    [EntityLayout("Rectangle", LayoutMethod.SequentialV1)]
+    [Id("Rectangle")][Layout(LayoutMethod.SequentialV1)]
     public interface IRectangle : IQuadrilateral
     {
         [Member(1)] double Length { get; set; }
