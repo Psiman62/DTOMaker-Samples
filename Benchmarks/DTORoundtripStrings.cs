@@ -12,10 +12,6 @@ namespace Benchmarks
     [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class DTORoundtripStrings
     {
-        public DTORoundtripStrings()
-        {
-        }
-
         [Params(ValueKind.StringNull, ValueKind.StringFull)]
         public ValueKind Kind;
 

@@ -143,10 +143,6 @@ namespace Benchmarks
             return dto;
         }
 
-        public DTORoundtripBasics()
-        {
-        }
-
         [Benchmark(Baseline = true)]
         public int Roundtrip_MessagePack()
         {
