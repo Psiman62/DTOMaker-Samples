@@ -11,7 +11,7 @@ namespace Benchmarks
     public class DTORoundtripPolymorphic
     {
         [Benchmark(Baseline = true)]
-        public int Roundtrip_MessagePack()
+        public int Roundtrip_Polymorphic_MessagePack()
         {
             var dto = new Benchmarks.MessagePack.Rectangle()
             {
@@ -26,7 +26,7 @@ namespace Benchmarks
         }
 
         [Benchmark]
-        public int Roundtrip_MemBlocks()
+        public int Roundtrip_Polymorphic_MemBlocks()
         {
             var dto = new Benchmarks.MemBlocks.Rectangle()
             {
