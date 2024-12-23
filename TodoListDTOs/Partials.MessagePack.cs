@@ -6,6 +6,7 @@ namespace TodoListDTOs.MessagePack
 {
     public partial class AllTypesSequential : IAllTypesSequential
     {
+        [IgnoreMember]
         public string? Field16_StringUTF8
         {
             get
