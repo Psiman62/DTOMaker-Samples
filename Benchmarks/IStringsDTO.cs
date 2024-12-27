@@ -5,7 +5,7 @@ using DTOMaker.Models.MessagePack;
 namespace Benchmarks
 {
     [Entity]
-    [EntityTag(2)]
+    [EntityKey(2)]
     [Id("StringsDTO")][Layout(LayoutMethod.SequentialV1)]
     public interface IStringsDTO
     {

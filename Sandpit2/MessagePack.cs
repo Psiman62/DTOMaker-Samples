@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 namespace Sandpit2.MessagePack
 {
     [MessagePackObject]
-    [Union(Equilateral.EntityTag, typeof(Equilateral))]
-    [Union(Rectangle.EntityTag, typeof(Rectangle))]
-    [Union(RightTriangle.EntityTag, typeof(RightTriangle))]
-    [Union(Square.EntityTag, typeof(Square))]
+    [Union(Equilateral.EntityKey, typeof(Equilateral))]
+    [Union(Rectangle.EntityKey, typeof(Rectangle))]
+    [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
+    [Union(Square.EntityKey, typeof(Square))]
     public abstract class EntityBase : IFreezable, IEquatable<EntityBase>
     {
-        public static EntityBase Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public static EntityBase Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
             int bytesRead;
-            return entityTag switch
+            return entityKey switch
             {
-                Equilateral.EntityTag => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                Rectangle.EntityTag => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
-                RightTriangle.EntityTag => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
-                Square.EntityTag => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
+                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
+                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
+                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -63,10 +63,10 @@ namespace Sandpit2.MessagePack
         public override int GetHashCode() => 0;
     }
     [MessagePackObject]
-    [Union(Equilateral.EntityTag, typeof(Equilateral))]
-    [Union(Rectangle.EntityTag, typeof(Rectangle))]
-    [Union(RightTriangle.EntityTag, typeof(RightTriangle))]
-    [Union(Square.EntityTag, typeof(Square))]
+    [Union(Equilateral.EntityKey, typeof(Equilateral))]
+    [Union(Rectangle.EntityKey, typeof(Rectangle))]
+    [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
+    [Union(Square.EntityKey, typeof(Square))]
     public abstract partial class Polygon { }
     public partial class Polygon : EntityBase, IPolygon, IFreezable
     {
@@ -78,18 +78,18 @@ namespace Sandpit2.MessagePack
         // - Square
         // - Triangle
 
-        public const int EntityTag = 3;
+        public const int EntityKey = 3;
 
-        public new static Polygon Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Polygon Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
             int bytesRead;
-            return entityTag switch
+            return entityKey switch
             {
-                Equilateral.EntityTag => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                Rectangle.EntityTag => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
-                RightTriangle.EntityTag => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
-                Square.EntityTag => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
+                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
+                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
+                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -138,8 +138,8 @@ namespace Sandpit2.MessagePack
     }
 
     [MessagePackObject(AllowPrivate = true)]
-    [Union(Equilateral.EntityTag, typeof(Equilateral))]
-    [Union(RightTriangle.EntityTag, typeof(RightTriangle))]
+    [Union(Equilateral.EntityKey, typeof(Equilateral))]
+    [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
     public abstract partial class Triangle { }
     public partial class Triangle : Polygon, ITriangle, IFreezable
     {
@@ -147,16 +147,16 @@ namespace Sandpit2.MessagePack
         // - Equilateral
         // - RightTriangle
 
-        public new const int EntityTag = 4;
+        public new const int EntityKey = 4;
 
-        public new static Triangle Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Triangle Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
             int bytesRead;
-            return entityTag switch
+            return entityKey switch
             {
-                Equilateral.EntityTag => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                RightTriangle.EntityTag => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
+                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -209,13 +209,13 @@ namespace Sandpit2.MessagePack
     {
         // Derived entities: 0
 
-        public new const int EntityTag = 5;
+        public new const int EntityKey = 5;
 
-        public new static Equilateral Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Equilateral Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            return entityTag switch
+            return entityKey switch
             {
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -282,13 +282,13 @@ namespace Sandpit2.MessagePack
     {
         // Derived entities: 0
 
-        public new const int EntityTag = 6;
+        public new const int EntityKey = 6;
 
-        public new static RightTriangle Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static RightTriangle Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            return entityTag switch
+            return entityKey switch
             {
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -363,8 +363,8 @@ namespace Sandpit2.MessagePack
     }
 
     [MessagePackObject]
-    [Union(Rectangle.EntityTag, typeof(Rectangle))]
-    [Union(Square.EntityTag, typeof(Square))]
+    [Union(Rectangle.EntityKey, typeof(Rectangle))]
+    [Union(Square.EntityKey, typeof(Square))]
     public abstract partial class Quadrilateral { }
     public partial class Quadrilateral : Polygon, IQuadrilateral, IFreezable
     {
@@ -372,15 +372,15 @@ namespace Sandpit2.MessagePack
         // - Rectangle
         // - Square
 
-        public new const int EntityTag = 7;
+        public new const int EntityKey = 7;
 
-        public new static Quadrilateral Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Quadrilateral Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            return entityTag switch
+            return entityKey switch
             {
-                Rectangle.EntityTag => MessagePackSerializer.Deserialize<Rectangle>(buffer, out var _),
-                Square.EntityTag => MessagePackSerializer.Deserialize<Square>(buffer, out var _),
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out var _),
+                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out var _),
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -433,13 +433,13 @@ namespace Sandpit2.MessagePack
     {
         // Derived entities: 0
 
-        public new const int EntityTag = 8;
+        public new const int EntityKey = 8;
 
-        public new static Square Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Square Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            return entityTag switch
+            return entityKey switch
             {
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 
@@ -506,13 +506,13 @@ namespace Sandpit2.MessagePack
     {
         // Derived entities: 0
 
-        public new const int EntityTag = 9;
+        public new const int EntityKey = 9;
 
-        public new static Rectangle Create(int entityTag, ReadOnlyMemory<byte> buffer)
+        public new static Rectangle Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            return entityTag switch
+            return entityKey switch
             {
-                _ => throw new ArgumentOutOfRangeException(nameof(entityTag), entityTag, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
 

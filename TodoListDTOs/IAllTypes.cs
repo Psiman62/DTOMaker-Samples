@@ -12,7 +12,7 @@ using DTOMaker.Models.MemBlocks;
 namespace TodoListDTOs
 {
     [Entity]
-    [EntityTag(1)]
+    [EntityKey(1)]
     [Id("AllTypesExplicit")][Layout(LayoutMethod.Explicit, 128)]
     public interface IAllTypesExplicit
     {
@@ -56,7 +56,7 @@ namespace TodoListDTOs
     }
 
     [Entity]
-    [EntityTag(2)]
+    [EntityKey(2)]
     [Id("AllTypesSequential")][Layout(LayoutMethod.SequentialV1)]
     public interface IAllTypesSequential
     {

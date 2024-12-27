@@ -6,7 +6,7 @@ using System;
 namespace Benchmarks
 {
     [Entity]
-    [EntityTag(1)]
+    [EntityKey(1)]
     [Id("MyDTP")][Layout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {

@@ -5,19 +5,19 @@ using DTOMaker.Models.MessagePack;
 namespace Sandpit2
 {
     [Entity]
-    [EntityTag(3)]
+    [EntityKey(3)]
     [Id("Polygon")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface IPolygon { }
 
     [Entity]
-    [EntityTag(4)]
+    [EntityKey(4)]
     [Id("Triangle")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface ITriangle : IPolygon { }
 
     [Entity]
-    [EntityTag(5)]
+    [EntityKey(5)]
     [Id("Equilateral")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface IEquilateral : ITriangle
@@ -26,7 +26,7 @@ namespace Sandpit2
     }
 
     [Entity]
-    [EntityTag(6)]
+    [EntityKey(6)]
     [Id("RightTriangle")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface IRightTriangle : ITriangle
@@ -36,13 +36,13 @@ namespace Sandpit2
     }
 
     [Entity]
-    [EntityTag(7)]
+    [EntityKey(7)]
     [Id("Quadrilateral")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface IQuadrilateral : IPolygon { }
 
     [Entity]
-    [EntityTag(8)]
+    [EntityKey(8)]
     [Id("Square")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface ISquare : IQuadrilateral
@@ -51,7 +51,7 @@ namespace Sandpit2
     }
 
     [Entity]
-    [EntityTag(9)]
+    [EntityKey(9)]
     [Id("Rectangle")]
     [Layout(LayoutMethod.SequentialV1)]
     public interface IRectangle : IQuadrilateral
