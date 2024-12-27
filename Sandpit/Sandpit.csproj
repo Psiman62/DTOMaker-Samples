@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="DataFac.Runtime" Version="0.2.2" />
-    <PackageReference Include="DTOMaker.MessagePack" Version="0.46.6" />
-    <PackageReference Include="DTOMaker.Models" Version="0.46.6" />
-    <PackageReference Include="DTOMaker.Models.MemBlocks" Version="0.46.6" />
-    <PackageReference Include="DTOMaker.Models.MessagePack" Version="0.46.6" />
-	  <PackageReference Include="MessagePack" Version="3.1.0" />
+    <PackageReference Include="DTOMaker.MessagePack" Version="0.46.9" />
+    <PackageReference Include="DTOMaker.Models" Version="0.46.8" />
+    <PackageReference Include="DTOMaker.Models.MemBlocks" Version="0.46.8" />
+    <PackageReference Include="DTOMaker.Models.MessagePack" Version="0.46.8" />
+	  <PackageReference Include="MessagePack" Version="3.1.1" />
   </ItemGroup>
 
 </Project>
