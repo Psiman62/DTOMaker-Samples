@@ -1,7 +1,7 @@
 ﻿using DataFac.Memory;
 using System;
 
-namespace Benchmarks
+namespace SampleDTO.Strings.NetStrux
 {
     public sealed class NetStruxStringsDTO : IStringsDTO
     {

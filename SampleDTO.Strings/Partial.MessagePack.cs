@@ -1,16 +1,10 @@
-﻿using MemoryPack;
+﻿using MessagePack;
 
-namespace Benchmarks
+namespace SampleDTO.Strings.MessagePack
 {
-    [MemoryPackable]
-    public sealed partial class MemoryPackStringsDTO : IStringsDTO
+    public partial class StringsDTO
     {
-        public void Freeze() { }
-
-        [MemoryPackInclude] public string Field05_Value { get; set; } = "";
-        [MemoryPackInclude] public bool Field05_HasValue { get; set; }
-
-        [MemoryPackIgnore]
+        [IgnoreMember]
         public string? Field05
         {
             get

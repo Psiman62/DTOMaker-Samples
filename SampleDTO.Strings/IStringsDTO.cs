@@ -2,11 +2,12 @@
 using DTOMaker.Models.MemBlocks;
 using DTOMaker.Models.MessagePack;
 
-namespace Benchmarks
+namespace SampleDTO.Strings
 {
     [Entity]
     [EntityKey(2)]
-    [Id("StringsDTO")][Layout(LayoutMethod.SequentialV1)]
+    [Id("StringsDTO")]
+    [Layout(LayoutMethod.SequentialV1)]
     public interface IStringsDTO
     {
         [Member(1)][Length(256)] string Field05_Value { get; set; }

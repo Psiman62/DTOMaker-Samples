@@ -3,7 +3,6 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Order;
 using MemoryPack;
 using MessagePack;
-using SampleDTO.Basic.NetStrux;
 using System;
 
 namespace Benchmarks
@@ -34,9 +33,9 @@ namespace Benchmarks
             "0123456789abcdef" +
             "0123456789abcde";
 
-        private MessagePack.StringsDTO MakeMyDTO_MessagePack(ValueKind kind)
+        private SampleDTO.Strings.MessagePack.StringsDTO MakeMyDTO_MessagePack(ValueKind kind)
         {
-            var dto = new MessagePack.StringsDTO();
+            var dto = new SampleDTO.Strings.MessagePack.StringsDTO();
             switch (Kind)
             {
                 case ValueKind.StringNull:
@@ -59,15 +58,15 @@ namespace Benchmarks
         {
             var dto = MakeMyDTO_MessagePack(Kind);
             dto.Freeze();
-            var buffer = MessagePackSerializer.Serialize<MessagePack.StringsDTO>(dto);
-            var copy = MessagePackSerializer.Deserialize<MessagePack.StringsDTO>(buffer, out int bytesRead);
+            var buffer = MessagePackSerializer.Serialize<SampleDTO.Strings.MessagePack.StringsDTO>(dto);
+            var copy = MessagePackSerializer.Deserialize<SampleDTO.Strings.MessagePack.StringsDTO>(buffer, out int bytesRead);
             dto.Freeze();
             return 0;
         }
 
-        private MemBlocks.StringsDTO MakeMyDTO_MemBlocks(ValueKind kind)
+        private SampleDTO.Strings.MemBlocks.StringsDTO MakeMyDTO_MemBlocks(ValueKind kind)
         {
-            var dto = new MemBlocks.StringsDTO();
+            var dto = new SampleDTO.Strings.MemBlocks.StringsDTO();
             switch (Kind)
             {
                 case ValueKind.StringNull:
@@ -91,14 +90,14 @@ namespace Benchmarks
             var dto = MakeMyDTO_MemBlocks(Kind);
             dto.Freeze();
             var buffers = dto.GetBuffers();
-            var copy = new MemBlocks.StringsDTO(buffers);
+            var copy = new SampleDTO.Strings.MemBlocks.StringsDTO(buffers);
             dto.Freeze();
             return 0;
         }
 
-        private NetStruxStringsDTO MakeMyDTO_NetStrux(ValueKind kind)
+        private SampleDTO.Strings.NetStrux.NetStruxStringsDTO MakeMyDTO_NetStrux(ValueKind kind)
         {
-            var dto = new NetStruxStringsDTO();
+            var dto = new SampleDTO.Strings.NetStrux.NetStruxStringsDTO();
             switch (Kind)
             {
                 case ValueKind.StringNull:
@@ -123,14 +122,14 @@ namespace Benchmarks
             dto.Freeze();
             Span<byte> buffer = stackalloc byte[512];
             dto.TryWrite(buffer);
-            var copy = new NetStruxMyDTO();
+            var copy = new SampleDTO.Basic.NetStrux.NetStruxMyDTO();
             copy.TryRead(buffer);
             return 0;
         }
 
-        private MemoryPackStringsDTO MakeStringsDTO_MemoryPack(ValueKind id)
+        private SampleDTO.Strings.MemoryPack.MemoryPackStringsDTO MakeStringsDTO_MemoryPack(ValueKind id)
         {
-            var dto = new MemoryPackStringsDTO();
+            var dto = new SampleDTO.Strings.MemoryPack.MemoryPackStringsDTO();
             switch (Kind)
             {
                 case ValueKind.StringNull:
@@ -153,8 +152,8 @@ namespace Benchmarks
         {
             var dto = MakeStringsDTO_MemoryPack(Kind);
             dto.Freeze();
-            ReadOnlyMemory<byte> buffer = MemoryPackSerializer.Serialize<MemoryPackStringsDTO>(dto);
-            var copy = MemoryPackSerializer.Deserialize<MemoryPackStringsDTO>(buffer.Span);
+            ReadOnlyMemory<byte> buffer = MemoryPackSerializer.Serialize<SampleDTO.Strings.MemoryPack.MemoryPackStringsDTO>(dto);
+            var copy = MemoryPackSerializer.Deserialize<SampleDTO.Strings.MemoryPack.MemoryPackStringsDTO>(buffer.Span);
             dto.Freeze();
             return 0;
         }

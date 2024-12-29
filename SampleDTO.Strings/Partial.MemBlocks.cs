@@ -1,4 +1,4 @@
-﻿namespace Benchmarks.MemBlocks
+﻿namespace SampleDTO.Strings.MemBlocks
 {
     public partial class StringsDTO
     {
