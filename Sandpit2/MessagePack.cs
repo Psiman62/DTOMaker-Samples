@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 namespace Sandpit2.MessagePack
 {
     [MessagePackObject]
-    [Union(Equilateral.EntityKey, typeof(Equilateral))]
-    [Union(Rectangle.EntityKey, typeof(Rectangle))]
-    [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
-    [Union(Square.EntityKey, typeof(Square))]
+    [Union(Sandpit2.MessagePack.Equilateral.EntityKey, typeof(Sandpit2.MessagePack.Equilateral))]
+    [Union(Sandpit2.MessagePack.Rectangle.EntityKey, typeof(Sandpit2.MessagePack.Rectangle))]
+    [Union(Sandpit2.MessagePack.RightTriangle.EntityKey, typeof(Sandpit2.MessagePack.RightTriangle))]
+    [Union(Sandpit2.MessagePack.Square.EntityKey, typeof(Sandpit2.MessagePack.Square))]
     public abstract class EntityBase : IFreezable, IEquatable<EntityBase>
     {
         public static EntityBase Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            int bytesRead;
             return entityKey switch
             {
-                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
-                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
-                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
+                Sandpit2.MessagePack.Equilateral.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Equilateral>(buffer, out _),
+                Sandpit2.MessagePack.Rectangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Rectangle>(buffer, out _),
+                Sandpit2.MessagePack.RightTriangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.RightTriangle>(buffer, out _),
+                Sandpit2.MessagePack.Square.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Square>(buffer, out _),
                 _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
@@ -68,7 +67,7 @@ namespace Sandpit2.MessagePack
     [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
     [Union(Square.EntityKey, typeof(Square))]
     public abstract partial class Polygon { }
-    public partial class Polygon : EntityBase, IPolygon, IFreezable
+    public partial class Polygon : EntityBase, IPolygon, IEquatable<Polygon>
     {
         // Derived entities: 6
         // - Equilateral
@@ -78,17 +77,16 @@ namespace Sandpit2.MessagePack
         // - Square
         // - Triangle
 
-        public const int EntityKey = 3;
+        public new const int EntityKey = 3;
 
         public new static Polygon Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            int bytesRead;
             return entityKey switch
             {
-                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out bytesRead),
-                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
-                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out bytesRead),
+                Sandpit2.MessagePack.Equilateral.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Equilateral>(buffer, out var _),
+                Sandpit2.MessagePack.Rectangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Rectangle>(buffer, out var _),
+                Sandpit2.MessagePack.RightTriangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.RightTriangle>(buffer, out var _),
+                Sandpit2.MessagePack.Square.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Square>(buffer, out var _),
                 _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
@@ -113,10 +111,9 @@ namespace Sandpit2.MessagePack
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Polygon other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Polygon other && Equals(other);
+        public static bool operator ==(Polygon? left, Polygon? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Polygon? left, Polygon? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -137,11 +134,11 @@ namespace Sandpit2.MessagePack
 
     }
 
-    [MessagePackObject(AllowPrivate = true)]
+    [MessagePackObject]
     [Union(Equilateral.EntityKey, typeof(Equilateral))]
     [Union(RightTriangle.EntityKey, typeof(RightTriangle))]
     public abstract partial class Triangle { }
-    public partial class Triangle : Polygon, ITriangle, IFreezable
+    public partial class Triangle : Polygon, ITriangle, IEquatable<Triangle>
     {
         // Derived entities: 2
         // - Equilateral
@@ -151,11 +148,10 @@ namespace Sandpit2.MessagePack
 
         public new static Triangle Create(int entityKey, ReadOnlyMemory<byte> buffer)
         {
-            int bytesRead;
             return entityKey switch
             {
-                Equilateral.EntityKey => MessagePackSerializer.Deserialize<Equilateral>(buffer, out bytesRead),
-                RightTriangle.EntityKey => MessagePackSerializer.Deserialize<RightTriangle>(buffer, out bytesRead),
+                Sandpit2.MessagePack.Equilateral.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Equilateral>(buffer, out var _),
+                Sandpit2.MessagePack.RightTriangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.RightTriangle>(buffer, out var _),
                 _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
@@ -180,10 +176,9 @@ namespace Sandpit2.MessagePack
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Triangle other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Triangle other && Equals(other);
+        public static bool operator ==(Triangle? left, Triangle? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Triangle? left, Triangle? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -204,8 +199,8 @@ namespace Sandpit2.MessagePack
 
     }
 
-    [MessagePackObject(AllowPrivate = true)]
-    public partial class Equilateral : Triangle, IEquilateral, IFreezable
+    [MessagePackObject]
+    public partial class Equilateral : Triangle, IEquilateral, IEquatable<Equilateral>
     {
         // Derived entities: 0
 
@@ -235,7 +230,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Length = default;
-        [Key(1)]
+        [Key(201)]
         public Double Length
         {
             get => _Length;
@@ -248,14 +243,13 @@ namespace Sandpit2.MessagePack
             if (ReferenceEquals(this, other)) return true;
             if (other is null) return false;
             if (!base.Equals(other)) return false;
-            if (!_Length.Equals(other.Length)) return false;
+            if (_Length != other.Length) return false;
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Equilateral other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Equilateral other && Equals(other);
+        public static bool operator ==(Equilateral? left, Equilateral? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Equilateral? left, Equilateral? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -277,8 +271,8 @@ namespace Sandpit2.MessagePack
 
     }
 
-    [MessagePackObject(AllowPrivate = true)]
-    public partial class RightTriangle : Triangle, IRightTriangle, IFreezable
+    [MessagePackObject]
+    public partial class RightTriangle : Triangle, IRightTriangle, IEquatable<RightTriangle>
     {
         // Derived entities: 0
 
@@ -309,7 +303,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Length = default;
-        [Key(1)]
+        [Key(201)]
         public Double Length
         {
             get => _Length;
@@ -318,7 +312,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Height = default;
-        [Key(2)]
+        [Key(202)]
         public Double Height
         {
             get => _Height;
@@ -331,15 +325,14 @@ namespace Sandpit2.MessagePack
             if (ReferenceEquals(this, other)) return true;
             if (other is null) return false;
             if (!base.Equals(other)) return false;
-            if (!_Length.Equals(other.Length)) return false;
-            if (!_Height.Equals(other.Height)) return false;
+            if (_Length != other.Length) return false;
+            if (_Height != other.Height) return false;
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is RightTriangle other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is RightTriangle other && Equals(other);
+        public static bool operator ==(RightTriangle? left, RightTriangle? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(RightTriangle? left, RightTriangle? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -366,7 +359,7 @@ namespace Sandpit2.MessagePack
     [Union(Rectangle.EntityKey, typeof(Rectangle))]
     [Union(Square.EntityKey, typeof(Square))]
     public abstract partial class Quadrilateral { }
-    public partial class Quadrilateral : Polygon, IQuadrilateral, IFreezable
+    public partial class Quadrilateral : Polygon, IQuadrilateral, IEquatable<Quadrilateral>
     {
         // Derived entities: 2
         // - Rectangle
@@ -378,8 +371,8 @@ namespace Sandpit2.MessagePack
         {
             return entityKey switch
             {
-                Rectangle.EntityKey => MessagePackSerializer.Deserialize<Rectangle>(buffer, out var _),
-                Square.EntityKey => MessagePackSerializer.Deserialize<Square>(buffer, out var _),
+                Sandpit2.MessagePack.Rectangle.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Rectangle>(buffer, out var _),
+                Sandpit2.MessagePack.Square.EntityKey => MessagePackSerializer.Deserialize<Sandpit2.MessagePack.Square>(buffer, out var _),
                 _ => throw new ArgumentOutOfRangeException(nameof(entityKey), entityKey, null)
             };
         }
@@ -404,10 +397,9 @@ namespace Sandpit2.MessagePack
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Quadrilateral other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Quadrilateral other && Equals(other);
+        public static bool operator ==(Quadrilateral? left, Quadrilateral? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Quadrilateral? left, Quadrilateral? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -428,8 +420,8 @@ namespace Sandpit2.MessagePack
 
     }
 
-    [MessagePackObject(AllowPrivate = true)]
-    public partial class Square : Quadrilateral, ISquare, IFreezable
+    [MessagePackObject]
+    public partial class Square : Quadrilateral, ISquare, IEquatable<Square>
     {
         // Derived entities: 0
 
@@ -459,7 +451,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Length = default;
-        [Key(1)]
+        [Key(201)]
         public Double Length
         {
             get => _Length;
@@ -472,14 +464,13 @@ namespace Sandpit2.MessagePack
             if (ReferenceEquals(this, other)) return true;
             if (other is null) return false;
             if (!base.Equals(other)) return false;
-            if (!_Length.Equals(other.Length)) return false;
+            if (_Length != other.Length) return false;
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Square other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Square other && Equals(other);
+        public static bool operator ==(Square? left, Square? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Square? left, Square? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {
@@ -501,8 +492,8 @@ namespace Sandpit2.MessagePack
 
     }
 
-    [MessagePackObject(AllowPrivate = true)]
-    public partial class Rectangle : Quadrilateral, IRectangle, IFreezable
+    [MessagePackObject]
+    public partial class Rectangle : Quadrilateral, IRectangle, IEquatable<Rectangle>
     {
         // Derived entities: 0
 
@@ -533,7 +524,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Length = default;
-        [Key(1)]
+        [Key(201)]
         public Double Length
         {
             get => _Length;
@@ -542,7 +533,7 @@ namespace Sandpit2.MessagePack
 
         [IgnoreMember]
         private Double _Height = default;
-        [Key(2)]
+        [Key(202)]
         public Double Height
         {
             get => _Height;
@@ -555,15 +546,14 @@ namespace Sandpit2.MessagePack
             if (ReferenceEquals(this, other)) return true;
             if (other is null) return false;
             if (!base.Equals(other)) return false;
-            if (!_Length.Equals(other.Length)) return false;
-            if (!_Height.Equals(other.Height)) return false;
+            if (_Length != other.Length) return false;
+            if (_Height != other.Height) return false;
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return obj is Rectangle other && Equals(other);
-        }
+        public override bool Equals(object? obj) => obj is Rectangle other && Equals(other);
+        public static bool operator ==(Rectangle? left, Rectangle? right) => left is not null ? left.Equals(right) : (right is null);
+        public static bool operator !=(Rectangle? left, Rectangle? right) => left is not null ? !left.Equals(right) : (right is not null);
 
         private int CalcHashCode()
         {

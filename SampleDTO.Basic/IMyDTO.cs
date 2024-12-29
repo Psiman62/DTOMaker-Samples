@@ -3,11 +3,12 @@ using DTOMaker.Models.MemBlocks;
 using DTOMaker.Models.MessagePack;
 using System;
 
-namespace Benchmarks
+namespace SampleDTO.Basic
 {
     [Entity]
     [EntityKey(1)]
-    [Id("MyDTP")][Layout(LayoutMethod.SequentialV1)]
+    [Id("MyDTP")]
+    [Layout(LayoutMethod.SequentialV1)]
     public interface IMyDTO
     {
         [Member(1)] bool Field01 { get; set; }

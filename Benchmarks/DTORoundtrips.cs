@@ -3,6 +3,9 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Order;
 using MemoryPack;
 using MessagePack;
+using SampleDTO.Basic;
+using SampleDTO.Basic.MemoryPack;
+using SampleDTO.Basic.NetStrux;
 using System;
 
 namespace Benchmarks
@@ -27,9 +30,9 @@ namespace Benchmarks
             "0123456789abcdef" +
             "0123456789abcdef";
 
-        private MessagePack.MyDTO MakeMyDTO_MessagePack(ValueKind id)
+        private SampleDTO.Basic.MessagePack.MyDTO MakeMyDTO_MessagePack(ValueKind id)
         {
-            var dto = new MessagePack.MyDTO();
+            var dto = new SampleDTO.Basic.MessagePack.MyDTO();
             switch (Kind)
             {
                 case ValueKind.Bool:
@@ -85,9 +88,9 @@ namespace Benchmarks
             return dto;
         }
 
-        private MemBlocks.MyDTO MakeMyDTO_MemBlocks(ValueKind id)
+        private SampleDTO.Basic.MemBlocks.MyDTO MakeMyDTO_MemBlocks(ValueKind id)
         {
-            var dto = new MemBlocks.MyDTO();
+            var dto = new SampleDTO.Basic.MemBlocks.MyDTO();
             switch (Kind)
             {
                 case ValueKind.Bool:
@@ -148,8 +151,8 @@ namespace Benchmarks
         {
             var dto = MakeMyDTO_MessagePack(Kind);
             dto.Freeze();
-            ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<MessagePack.MyDTO>(dto);
-            var copy = MessagePackSerializer.Deserialize<MessagePack.MyDTO>(buffer, out int bytesRead);
+            ReadOnlyMemory<byte> buffer = MessagePackSerializer.Serialize<SampleDTO.Basic.MessagePack.MyDTO>(dto);
+            var copy = MessagePackSerializer.Deserialize<SampleDTO.Basic.MessagePack.MyDTO>(buffer, out int bytesRead);
             dto.Freeze();
             return buffer.Length;
         }
@@ -171,7 +174,7 @@ namespace Benchmarks
             var dto = MakeMyDTO_MemBlocks(Kind);
             dto.Freeze();
             var buffers = dto.GetBuffers();
-            var copy = new MemBlocks.MyDTO(buffers);
+            var copy = new SampleDTO.Basic.MemBlocks.MyDTO(buffers);
             int sum = 0;
             foreach (var buffer in buffers.Span)
             {

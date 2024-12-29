@@ -3,6 +3,7 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Order;
 using MemoryPack;
 using MessagePack;
+using SampleDTO.Basic.NetStrux;
 using System;
 
 namespace Benchmarks
