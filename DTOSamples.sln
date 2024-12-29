@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDTO.Basic", "SampleDT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDTO.Strings", "SampleDTO.Strings\SampleDTO.Strings.csproj", "{0154D548-5321-4204-A8AB-56B32CC187CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDTO.Shapes", "SampleDTO.Shapes\SampleDTO.Shapes.csproj", "{4B1FAD95-E0E8-406C-A809-33271524152C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{0154D548-5321-4204-A8AB-56B32CC187CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0154D548-5321-4204-A8AB-56B32CC187CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0154D548-5321-4204-A8AB-56B32CC187CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1FAD95-E0E8-406C-A809-33271524152C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1FAD95-E0E8-406C-A809-33271524152C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1FAD95-E0E8-406C-A809-33271524152C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1FAD95-E0E8-406C-A809-33271524152C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

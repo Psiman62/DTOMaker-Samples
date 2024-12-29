@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
@@ -9,7 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 		<PackageReference Include="DataFac.Memory" Version="0.6.2" />
 		<PackageReference Include="DataFac.Runtime" Version="0.2.3" />
 		<PackageReference Include="DTOMaker.MemBlocks" Version="0.48.4-dev" />
@@ -19,13 +17,6 @@
 		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.48.4-dev" />
 		<PackageReference Include="MemoryPack" Version="1.21.3" />
 		<PackageReference Include="MessagePack" Version="2.5.192" />
-		<PackageReference Include="System.Memory" Version="4.6.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\SampleDTO.Basic\SampleDTO.Basic.csproj" />
-		<ProjectReference Include="..\SampleDTO.Shapes\SampleDTO.Shapes.csproj" />
-		<ProjectReference Include="..\SampleDTO.Strings\SampleDTO.Strings.csproj" />
 	</ItemGroup>
 
 </Project>

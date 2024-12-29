@@ -13,14 +13,14 @@ namespace Benchmarks
         [Benchmark(Baseline = true)]
         public int Roundtrip_Polymorphic_MessagePack()
         {
-            var dto = new Benchmarks.MessagePack.Rectangle()
+            var dto = new SampleDTO.Shapes.MessagePack.Rectangle()
             {
                 Length = 3.0D,
                 Height = 2.0D,
             };
             dto.Freeze();
-            var buffer = MessagePackSerializer.Serialize<Benchmarks.MessagePack.Polygon>(dto);
-            var copy = MessagePackSerializer.Deserialize<Benchmarks.MessagePack.Polygon>(buffer, out int bytesRead);
+            var buffer = MessagePackSerializer.Serialize<SampleDTO.Shapes.MessagePack.Shape>(dto);
+            var copy = MessagePackSerializer.Deserialize<SampleDTO.Shapes.MessagePack.Shape>(buffer, out int bytesRead);
             dto.Freeze();
             return 0;
         }
@@ -28,7 +28,7 @@ namespace Benchmarks
         [Benchmark]
         public int Roundtrip_Polymorphic_MemBlocks()
         {
-            var dto = new Benchmarks.MemBlocks.Rectangle()
+            var dto = new SampleDTO.Shapes.MemBlocks.Rectangle()
             {
                 Length = 3.0D,
                 Height = 2.0D,
@@ -36,7 +36,7 @@ namespace Benchmarks
             dto.Freeze();
             var buffers = dto.GetBuffers();
             string entityId = dto.GetEntityId();
-            var copy = Benchmarks.MemBlocks.Polygon.CreateFrom(entityId, buffers);
+            var copy = SampleDTO.Shapes.MemBlocks.Shape.CreateFrom(entityId, buffers);
             dto.Freeze();
             return 0;
         }
