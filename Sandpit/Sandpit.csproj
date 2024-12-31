@@ -7,12 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DataFac.Runtime" Version="0.2.3" />
-		<PackageReference Include="DTOMaker.MessagePack" Version="0.50.2" />
-		<PackageReference Include="DTOMaker.Models" Version="0.50.3" />
-		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.50.2" />
-		<PackageReference Include="DTOMaker.Runtime.MemBlocks" Version="0.50.2" />
-		<PackageReference Include="DTOMaker.Runtime.MessagePack" Version="0.50.2" />
+		<PackageReference Include="DTOMaker.MessagePack" Version="0.51.1" />
+		<PackageReference Include="DTOMaker.Models" Version="0.51.2" />
+		<PackageReference Include="DTOMaker.Models.MessagePack" Version="0.51.1" />
+		<PackageReference Include="DTOMaker.Runtime.MemBlocks" Version="0.51.1" />
+		<PackageReference Include="DTOMaker.Runtime.MessagePack" Version="0.51.1" />
 		<PackageReference Include="MessagePack" Version="2.5.192" />
 	</ItemGroup>
 
