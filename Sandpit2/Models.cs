@@ -7,19 +7,19 @@ namespace Sandpit2
     [Entity]
     [EntityKey(3)]
     [Id("Polygon")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IPolygon { }
 
     [Entity]
     [EntityKey(4)]
     [Id("Triangle")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface ITriangle : IPolygon { }
 
     [Entity]
     [EntityKey(5)]
     [Id("Equilateral")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IEquilateral : ITriangle
     {
         [Member(1)] double Length { get; set; }
@@ -28,7 +28,7 @@ namespace Sandpit2
     [Entity]
     [EntityKey(6)]
     [Id("RightTriangle")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IRightTriangle : ITriangle
     {
         [Member(1)] double Length { get; set; }
@@ -38,13 +38,13 @@ namespace Sandpit2
     [Entity]
     [EntityKey(7)]
     [Id("Quadrilateral")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IQuadrilateral : IPolygon { }
 
     [Entity]
     [EntityKey(8)]
     [Id("Square")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface ISquare : IQuadrilateral
     {
         [Member(1)] double Length { get; set; }
@@ -53,7 +53,7 @@ namespace Sandpit2
     [Entity]
     [EntityKey(9)]
     [Id("Rectangle")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IRectangle : IQuadrilateral
     {
         [Member(1)] double Length { get; set; }

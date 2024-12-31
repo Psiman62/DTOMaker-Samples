@@ -8,7 +8,7 @@ namespace SampleDTO.Basic
     [Entity]
     [EntityKey(1)]
     [Id("MyDTP")]
-    [Layout(LayoutMethod.SequentialV1)]
+    [Layout(LayoutMethod.Linear)]
     public interface IMyDTO
     {
         [Member(1)] bool Field01 { get; set; }
@@ -16,7 +16,7 @@ namespace SampleDTO.Basic
         [Member(3)][Endian(true)] double Field02BE { get; set; }
         [Member(4)] Guid Field03 { get; set; }
         [Member(5)] short Field05_Length { get; set; }
-        [Member(6)][Length(128)] ReadOnlyMemory<byte> Field05_Data { get; set; }
+        [Member(6)][Capacity(128)] ReadOnlyMemory<byte> Field05_Data { get; set; }
         string? Field05 { get; set; }
     }
 }

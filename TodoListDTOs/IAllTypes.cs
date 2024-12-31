@@ -56,7 +56,7 @@ namespace TodoListDTOs
 
     [Entity]
     [EntityKey(2)]
-    [Id("AllTypesSequential")][Layout(LayoutMethod.SequentialV1)]
+    [Id("AllTypesSequential")][Layout(LayoutMethod.Linear)]
     public interface IAllTypesSequential
     {
         [Member(1)] bool Field01 { get; }
@@ -75,8 +75,8 @@ namespace TodoListDTOs
         [Member(14)] Decimal Field14 { get; }
         [Member(15)]int Field15_Data { get; }
         //DayOfWeek Field15 { get; }
-        [Member(16)][Length(32)] ReadOnlyMemory<byte> Field16_Buffer { get; set; }
-        [Member(17)][Length(32)] ReadOnlyMemory<char> Field18_Buffer { get; set; }
+        [Member(16)][Capacity(32)] ReadOnlyMemory<byte> Field16_Buffer { get; set; }
+        [Member(17)][Capacity(32)] ReadOnlyMemory<char> Field18_Buffer { get; set; }
         [Member(18)] int Field16_Length { get; set; }
         [Member(19)] int Field18_Length { get; set; }
         //ReadOnlyMemory<byte>? Field16_Binary { get; set; }
