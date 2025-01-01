@@ -7,19 +7,16 @@ namespace SampleDTO.Shapes
 {
     [Entity]
     [EntityKey(3)]
-    [Id("Polygon")]
     [Layout(LayoutMethod.Linear)]
     public interface IShape { }
 
     [Entity]
     [EntityKey(4)]
-    [Id("Triangle")]
     [Layout(LayoutMethod.Linear)]
     public interface ITriangle : IShape { }
 
     [Entity]
     [EntityKey(5)]
-    [Id("Equilateral")]
     [Layout(LayoutMethod.Linear)]
     public interface IEquilateral : ITriangle
     {
@@ -28,7 +25,6 @@ namespace SampleDTO.Shapes
 
     [Entity]
     [EntityKey(6)]
-    [Id("RightTriangle")]
     [Layout(LayoutMethod.Linear)]
     public interface IRightTriangle : ITriangle
     {
@@ -38,13 +34,11 @@ namespace SampleDTO.Shapes
 
     [Entity]
     [EntityKey(7)]
-    [Id("Quadrilateral")]
     [Layout(LayoutMethod.Linear)]
     public interface IQuadrilateral : IShape { }
 
     [Entity]
     [EntityKey(8)]
-    [Id("Square")]
     [Layout(LayoutMethod.Linear)]
     public interface ISquare : IQuadrilateral
     {
@@ -53,7 +47,6 @@ namespace SampleDTO.Shapes
 
     [Entity]
     [EntityKey(9)]
-    [Id("Rectangle")]
     [Layout(LayoutMethod.Linear)]
     public interface IRectangle : IQuadrilateral
     {
