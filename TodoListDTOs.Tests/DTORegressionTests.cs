@@ -20,21 +20,11 @@ namespace TodoListDTOs.Tests
             var transport1 = new MemBlocks.AllTypesExplicit(orig);
             transport1.Freeze();
 
-            var buffers = transport1.GetBuffers();
-            buffers.Length.Should().Be(1);
+            var buffer = transport1.GetBuffer();
+            buffer.Length.Should().Be(256);
 
-            string.Join("-", buffers.Span[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
-                "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+"" +
-                "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-"+
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-
-            var transport2 = new MemBlocks.AllTypesExplicit(buffers);
-            transport2.Freeze();
+            var entityId = DataFac.MemBlocks.Protocol.ParseEntityId(buffer);
+            var transport2 = MemBlocks.AllTypesExplicit.CreateFrom(entityId, buffer);
 
             var copy = new CSPoco.AllTypesExplicit(transport2);
             copy.Freeze();
@@ -58,27 +48,11 @@ namespace TodoListDTOs.Tests
             var transport1 = new MemBlocks.AllTypesSequential(orig);
             transport1.Freeze();
 
-            var buffers = transport1.GetBuffers();
-            buffers.Length.Should().Be(1);
+            var buffer = transport1.GetBuffer();
+            buffer.Length.Should().Be(384);
 
-            string.Join("-", buffers.Span[0].ToArray().Select(b => b.ToString("X2"))).Should().Be(
-                "01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "7B-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "61-62-63-64-65-66-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "06-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-" +
-                "00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00");
-            var transport2 = new MemBlocks.AllTypesSequential(buffers);
+            var entityId = DataFac.MemBlocks.Protocol.ParseEntityId(buffer);
+            var transport2 = MemBlocks.AllTypesSequential.CreateFrom(entityId, buffer);
             transport2.Freeze();
 
             var copy = new CSPoco.AllTypesSequential(transport2);

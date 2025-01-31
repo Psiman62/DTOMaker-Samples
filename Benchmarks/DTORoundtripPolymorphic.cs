@@ -34,9 +34,9 @@ namespace Benchmarks
                 Height = 2.0D,
             };
             dto.Freeze();
-            var buffers = dto.GetBuffers();
+            var buffer = dto.GetBuffer();
             string entityId = dto.GetEntityId();
-            var copy = SampleDTO.Shapes.MemBlocks.Shape.CreateFrom(entityId, buffers);
+            var copy = SampleDTO.Shapes.MemBlocks.Shape.CreateFrom(entityId, buffer);
             dto.Freeze();
             return 0;
         }

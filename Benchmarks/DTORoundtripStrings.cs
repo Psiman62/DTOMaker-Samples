@@ -89,8 +89,9 @@ namespace Benchmarks
         {
             var dto = MakeMyDTO_MemBlocks(Kind);
             dto.Freeze();
-            var buffers = dto.GetBuffers();
-            var copy = new SampleDTO.Strings.MemBlocks.StringsDTO(buffers);
+            var buffer = dto.GetBuffer();
+            var entityId=dto.GetEntityId();
+            var copy = SampleDTO.Strings.MemBlocks.StringsDTO.CreateFrom(entityId, buffer);
             dto.Freeze();
             return 0;
         }

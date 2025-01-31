@@ -173,14 +173,10 @@ namespace Benchmarks
         {
             var dto = MakeMyDTO_MemBlocks(Kind);
             dto.Freeze();
-            var buffers = dto.GetBuffers();
-            var copy = new SampleDTO.Basic.MemBlocks.MyDTO(buffers);
-            int sum = 0;
-            foreach (var buffer in buffers.Span)
-            {
-                sum += buffer.Length;
-            }
-            return sum;
+            var buffer = dto.GetBuffer();
+            var entityId = dto.GetEntityId();
+            var copy = SampleDTO.Basic.MemBlocks.MyDTO.CreateFrom(entityId, buffer);
+            return buffer.Length;
         }
 
         [Benchmark]
